@@ -8,7 +8,7 @@ SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = docsource
 BUILDDIR      = build
 
-# Put it first so that "make" without argument is like "make help".
+# Put it first so that "make" without argument is like "make help".con
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 

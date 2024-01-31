@@ -38,6 +38,9 @@ extensions = [
     # 'sphinx_autodoc_typehints',
     'sphinx.ext.viewcode',
     'sphinx_copybutton',
+    'sphinxcontrib.packages',
+    'sphinx.ext.mathjax',
+
 ]
 # Reference file
 bibtex_bibfiles = ['bibliography.bib']
@@ -65,7 +68,9 @@ latex_elements = {
     'preamble':
         r'''
         \newcommand{\tran}{{\mkern-1.5mu\mathsf{T}}}
+        \usepackage[short,nocomma]{optidef}
         ''',
+
 }
 
 # -- Options for HTML output -------------------------------------------------
@@ -80,4 +85,16 @@ html_logo = "images/hilo_logo_short_2.png"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = []  # '_static' -> We don't have a folder '_static' at the moment
 
-mathjax_path = 'https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+#mathjax_path = 'https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+mathjax_path = 'https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js'
+#mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+
+#mathjax3_config = {
+#    'extensions': ['tex2jax.js'],
+#    'jax': ['input/TeX', 'output/HTML-CSS'],
+#}
+
+
+
+
+

@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -67,9 +67,6 @@
           
 
           
-            
-            <img src="../_static/hilo_logo_short_2.png" class="logo" />
-          
           </a>
 
           
@@ -109,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/path_following_mpc.html">Path following vs Trajectory Tracking MPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/CSTR_Example.html">CSTR Reactor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/learn_mpc.html">Learning an MPC controller with a NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/mhe_helicopter_example.html">CE 150 Helicopter</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul class="current">
@@ -195,9 +193,9 @@
             
   <section id="modelling-module">
 <span id="id1"></span><h1>Modelling module<a class="headerlink" href="#modelling-module" title="Permalink to this heading">¶</a></h1>
-<p>The main component of the HILO-MPC Modelling module is the <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> class. For a more detailed
+<p>The main component of the HILO-MPC Modelling module is the <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> class. For a more detailed
 description of the methods refer to <a class="reference internal" href="../api/modelling.html#modelling-autodoc"><span class="std std-ref">the API</span></a>.</p>
-<p>Models are used to describe the dynamics of systems. The HILO-MPC <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> class supports the following system properties:</p>
+<p>Models are used to describe the dynamics of systems. The HILO-MPC <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> class supports the following system properties:</p>
 <ul class="simple">
 <li><p><strong>linear/nonlinear</strong> system dynamics</p></li>
 <li><p><strong>continuous/discrete</strong> time dynamics</p></li>
@@ -216,7 +214,7 @@ y&amp;=h(x(t),z(t),u(t_k),p),\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(x\in\mathbb{R}^{n_x}\)</span> is the state vector, <span class="math notranslate nohighlight">\(z\in\mathbb{R}^{n_z}\)</span> the vector of algebraic variables, <span class="math notranslate nohighlight">\(u\in\mathbb{R}^{n_u}\)</span> is the input vector and <span class="math notranslate nohighlight">\(p\in\mathbb{R}^{n_p}\)</span> is a vector of parameters. Since the system is time-invariant only the states <span class="math notranslate nohighlight">\(x\)</span>, algebraic variables <span class="math notranslate nohighlight">\(z\)</span> and the input <span class="math notranslate nohighlight">\(u\)</span> depend on the time <span class="math notranslate nohighlight">\(t\)</span>. Due to practical reasons the input <span class="math notranslate nohighlight">\(u\)</span> is assumed to be piecewise constant (hence the index <span class="math notranslate nohighlight">\(k\)</span>). The function <span class="math notranslate nohighlight">\(f\colon\mathbb{R}^{n_x+n_z+n_u+n_p}\mapsto\mathbb{R}^{n_x}\)</span> represents the ODEs of the model and the function <span class="math notranslate nohighlight">\(g\colon\mathbb{R}^{n_x+n_z+n_u+n_p}\mapsto\mathbb{R}^{n_z}\)</span> depicts the algebraic equations forming a semi-explicit DAE system overall.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The HILO-MPC <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> class only supports semi-explicit DAE systems of index 1. The index of 1 indicates that the DAE system can be transformed into a pure ODE system by differentiating the algebraic equations once.</p>
+<p>The HILO-MPC <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> class only supports semi-explicit DAE systems of index 1. The index of 1 indicates that the DAE system can be transformed into a pure ODE system by differentiating the algebraic equations once.</p>
 </div>
 <p>The function <span class="math notranslate nohighlight">\(h\colon\mathbb{R}^{n_x+n_z+n_u+n_p}\mapsto\mathbb{R}^{n_y}\)</span> describes the measurement equations mapping the states and algebraic variables to some measurable quantities.</p>
 <p>In the <strong>time-variant</strong> case the functions <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(g\)</span> and <span class="math notranslate nohighlight">\(h\)</span> additionally depend explicitly on the time as well</p>
@@ -295,15 +293,13 @@ y_k&amp;=h(x_k,z_k,u_k,p),\end{split}\]</div>
         };
     </script>
       <script type="text/javascript" src="../_static/documentation_options.js"></script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
       <script type="text/javascript" src="../_static/clipboard.min.js"></script>
       <script type="text/javascript" src="../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script type="text/javascript" src="../None"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
 
   
 

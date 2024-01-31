@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -44,7 +44,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="HILO-MPC 1.0.1 documentation" href="../index.html"/>
         <link rel="next" title="Machine learning module" href="machinelearnings.html"/>
-        <link rel="prev" title="Learning an MPC controller with a NN" href="../examples/learn_mpc.html"/> 
+        <link rel="prev" title="CE 150 Helicopter" href="../examples/mhe_helicopter_example.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -66,9 +66,6 @@
             <a href="../index.html" class="icon icon-home"> HILO-MPC
           
 
-          
-            
-            <img src="../_static/hilo_logo_short_2.png" class="logo" />
           
           </a>
 
@@ -109,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/path_following_mpc.html">Path following vs Trajectory Tracking MPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/CSTR_Example.html">CSTR Reactor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/learn_mpc.html">Learning an MPC controller with a NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/mhe_helicopter_example.html">CE 150 Helicopter</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul class="current">
@@ -501,7 +499,7 @@ For now, we use the QuadraticCost, since it covers 99.9% of the problems you mig
 </div>
 <p>Defining a path-following problem can be done in  three steps:</p>
 <ol class="arabic simple">
-<li><p>Run <a class="reference internal" href="../api/controllers.html#hilo_mpc.NMPC.create_path_variable" title="hilo_mpc.NMPC.create_path_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code></a> to generate the path variable</p></li>
+<li><p>Run <code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code> to generate the path variable</p></li>
 <li><p>Define the path function using the path variable</p></li>
 <li><p>Pass the path function function to the <cite>ref</cite> argument of stage and terminal cost and put <cite>path_following=True</cite></p></li>
 </ol>
@@ -509,7 +507,7 @@ For now, we use the QuadraticCost, since it covers 99.9% of the problems you mig
 <p class="admonition-title">Note</p>
 <p>You can create only as many path variables and you can have as many different path functions as you want.</p>
 </div>
-<p>You can pass to the <a class="reference internal" href="../api/controllers.html#hilo_mpc.NMPC.create_path_variable" title="hilo_mpc.NMPC.create_path_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code></a>:</p>
+<p>You can pass to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code>:</p>
 <ul class="simple">
 <li><p>The name of the variable.</p></li>
 <li><p>The lower and upper bound on the virtual input.</p></li>
@@ -541,7 +539,7 @@ quadratic stage cost</p>
 <p class="admonition-title">Note</p>
 <p>You can define the path function with any other variable that appears in the model!</p>
 </div>
-<p>You can also have multiple path variables. To do that just simply call the <a class="reference internal" href="../api/controllers.html#hilo_mpc.NMPC.create_path_variable" title="hilo_mpc.NMPC.create_path_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code></a>
+<p>You can also have multiple path variables. To do that just simply call the <code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code>
 as many times you want. For example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nmpc</span> <span class="o">=</span> <span class="n">NMPC</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
@@ -693,7 +691,7 @@ See <a class="reference external" href="https://web.casadi.org/python-api/#qp">t
         <a href="machinelearnings.html" class="btn btn-neutral float-right" title="Machine learning module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../examples/learn_mpc.html" class="btn btn-neutral" title="Learning an MPC controller with a NN" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../examples/mhe_helicopter_example.html" class="btn btn-neutral" title="CE 150 Helicopter" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -732,15 +730,13 @@ See <a class="reference external" href="https://web.casadi.org/python-api/#qp">t
         };
     </script>
       <script type="text/javascript" src="../_static/documentation_options.js"></script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
       <script type="text/javascript" src="../_static/clipboard.min.js"></script>
       <script type="text/javascript" src="../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script type="text/javascript" src="../None"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
 
   
 

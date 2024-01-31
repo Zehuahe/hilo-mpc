@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -67,9 +67,6 @@
           
 
           
-            
-            <img src="../_static/hilo_logo_short_2.png" class="logo" />
-          
           </a>
 
           
@@ -109,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples/path_following_mpc.html">Path following vs Trajectory Tracking MPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/CSTR_Example.html">CSTR Reactor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/learn_mpc.html">Learning an MPC controller with a NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/mhe_helicopter_example.html">CE 150 Helicopter</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul class="current">
@@ -117,6 +115,9 @@
 <li class="toctree-l1"><a class="reference internal" href="modellings.html">Modelling module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Observer module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#moving-horizon-estimator">Moving Horizon Estimator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#horizon">Horizon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#objective-function">Objective function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constraints">Constraints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#non-uniform-sampling-intervals">Non-uniform sampling intervals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multi-rate-measurements">Multi-rate measurements</a></li>
 </ul>
@@ -200,7 +201,7 @@
   <section id="observer-module">
 <span id="id1"></span><h1>Observer module<a class="headerlink" href="#observer-module" title="Permalink to this heading">¶</a></h1>
 <p>The HILO-MPC Observer module contains several state (and parameter) observers.
-Observer are used to infer states and parameters from measurements. For a more detailed
+observers are used to infer states and parameters from measurements. For a more detailed
 description of the methods refer to <a class="reference internal" href="../api/estimators.html#observer-autodoc"><span class="std std-ref">the API</span></a>.</p>
 <p>The Observer module contains the following classes:</p>
 <ul class="simple">
@@ -212,6 +213,82 @@ description of the methods refer to <a class="reference internal" href="../api/e
 </ul>
 <section id="moving-horizon-estimator">
 <h2>Moving Horizon Estimator<a class="headerlink" href="#moving-horizon-estimator" title="Permalink to this heading">¶</a></h2>
+<p>Moving horizon estimation (MHE) is an optimization-based state estimation technique. Utilizing a finite sequence of
+previously observed measurements, which inherently include noise and other inaccuracies, MHE estimates the current
+state of the system. In the toolbox, the class MHE can set a Moving Horizon Estimator where we need to define the following elements:</p>
+<ol class="arabic simple">
+<li><p>A horizon length.</p></li>
+<li><p>An objective function.</p></li>
+<li><p>constraints (optional)</p></li>
+</ol>
+<section id="horizon">
+<h3>Horizon<a class="headerlink" href="#horizon" title="Permalink to this heading">¶</a></h3>
+<p>To achieve an effective state estimate, the ideal approach involves considering all past measurements from the initial
+time up to the present, leading to what is referred to as a full information estimator. Unfortunately, the computational
+complexity becomes prohibitive as the number of measurements increases. Given this challenge, moving horizon estimation
+uses only a fixed number <span class="math notranslate nohighlight">\(N\)</span> of past measurements.  At each time step, the optimal estimated state trajectory on the current
+estimation horizon is determined by the past <span class="math notranslate nohighlight">\(N\)</span> measurements. When a new measurement arrives at the instant <span class="math notranslate nohighlight">\(T\)</span>, the estimation
+horizon moves forward one time step and the oldest measurement from time <span class="math notranslate nohighlight">\(T-N-1\)</span>  is discarded. The size of the optimization
+problems remains constant. The moving process is shown in the following figure.</p>
+<img alt="../_images/mhe_horizon.png" src="../_images/mhe_horizon.png" />
+<p>Thus horizon length is an important parameter in terms of accuracy and computational complexity. The class provides the <code class="code docutils literal notranslate"><span class="pre">horizon</span></code> property
+to set this parameter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mhe</span> <span class="o">=</span> <span class="n">MHE</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">mhe</span><span class="o">.</span><span class="n">horizon</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</section>
+<section id="objective-function">
+<h3>Objective function<a class="headerlink" href="#objective-function" title="Permalink to this heading">¶</a></h3>
+<p>We assume that the current instant is T and the horizon is N. The objective of MHE is to find an initial state <span class="math notranslate nohighlight">\(x_{T - N}\)</span> and the disturbance
+sequence <span class="math notranslate nohighlight">\(\mathbf{w} = [w_{T - N}, w_{T - N + 1}, \dots, w_{T-1}]^T\)</span> so that the objective function is minimized which can be formulated as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp;\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}} \quad\Phi_T\\
+\hspace{3em}\Phi_T &amp;= Z_{T-N}\left( x_{T-N} \right) + \sum_{k = T - N}^{T - 1} L\left( v_k,w_k\right) \\
+      &amp;= \left\| {x_{T-N} - \bar{x}_{T-N}} \right\|_{\Pi^{-1}}^{2} + \sum_{k = T - N}^{T - 1}\left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2} \\
+      &amp;\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
+      &amp; \hspace{4em} y_k = h_k\left( x_k, u_k \right) + v_k \\
+      &amp; \hspace{3em} x_k \in \mathcal{X}_k, \;w_k \in \mathcal{W}_k, \;v_k \in \mathcal{V}_k
+\end{aligned}\end{split}\]</div>
+<p>The objective function <span class="math notranslate nohighlight">\(\Phi_T\)</span> contains two parts, the stage cost function <span class="math notranslate nohighlight">\(L\left ( v_k,w_k\right )\)</span> and the arrival cost <span class="math notranslate nohighlight">\(Z_{T-N}\left ( x_{T-N} \right )\)</span>.
+The stage cost function <span class="math notranslate nohighlight">\(L\left ( v_k,w_k\right ) = \left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2}\)</span> is commonly quadratic and
+contains two parts, namely measurement noise cost <span class="math notranslate nohighlight">\(\left\|v_{k} \right\|_{R^{-1}}^{2}\)</span> and state noise cost <span class="math notranslate nohighlight">\(\left\|w_{k} \right\|_{Q^{-1}}^{2}\)</span>, <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(R\)</span>
+are the covariance matrix of the state noise and measurement noise.
+The arrival cost is <span class="math notranslate nohighlight">\(Z_{T-N}\left( x_{T-N} \right) = \left\| {x_{T-N} - \bar{x}_{T-N}} \right\|_{\Pi^{-1}}^{2}\)</span>.  <span class="math notranslate nohighlight">\(\Pi\)</span> is the covariance matrix of the initial guess.</p>
+<p>The class MHE uses <code class="code docutils literal notranslate"><span class="pre">quad_stage_cost</span></code> and <code class="code docutils literal notranslate"><span class="pre">quad_arrival_cost</span></code> to construct a quadratic objective function:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">quad_stage_cost.add_state_noise</span></code> is to set the state noise cost <span class="math notranslate nohighlight">\(\left\|w_{k} \right\|_{Q^{-1}}^{2}\)</span> and the parameter <code class="code docutils literal notranslate"><span class="pre">weights</span></code> is the confidence matrix of the state noise which is
+often set as the inverse of the covariance matrix of the state noise <span class="math notranslate nohighlight">\(Q^{-1}\)</span></p>
+<p><code class="code docutils literal notranslate"><span class="pre">quad_stage_cost.add_measurements</span></code> is to set the measurement noise cost <span class="math notranslate nohighlight">\(\left\|v_{k} \right\|_{R^{-1}}^{2}\)</span> and the parameter <code class="code docutils literal notranslate"><span class="pre">weights</span></code> is the confidence matrix of the measurement noise which is
+often set as the inverse of the covariance matrix of the measurement noise <span class="math notranslate nohighlight">\(R^{-1}\)</span></p>
+<p><code class="code docutils literal notranslate"><span class="pre">quad_arrival_cost.add_states</span></code> is to set the arrival state cost <span class="math notranslate nohighlight">\(Z_{T-N}\left ( x_{T-N} \right )\)</span>. The parameter <code class="code docutils literal notranslate"><span class="pre">weights</span></code> is the confidence matrix for the knowledge of the initial guess
+and the parameter <code class="code docutils literal notranslate"><span class="pre">guess</span></code> is set as the initial guess.</p>
+<p>For example, if we know the variance of the measurement noise is <span class="math notranslate nohighlight">\(0.25^2\)</span>, the covariance matrix of the state noise is <span class="math notranslate nohighlight">\(\begin{bmatrix} (0.001)^2 &amp; 0 &amp; 0 \\ 0 &amp; (0.001)^2 &amp; 0 \\ 0 &amp; 0 &amp; (0.001)^2 \end{bmatrix}\)</span>
+the covariance matrix of the initial guess is <span class="math notranslate nohighlight">\(\begin{bmatrix} (0.5)^2 &amp; 0 &amp; 0 \\ 0 &amp; (0.5)^2 &amp; 0 \\ 0 &amp; 0 &amp; (0.5)^2 \end{bmatrix}\)</span>. The code could be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mhe</span> <span class="o">=</span> <span class="n">MHE</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">mhe</span><span class="o">.</span><span class="n">quad_arrival_cost</span><span class="o">.</span><span class="n">add_states</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.5</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.5</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)],</span> <span class="n">guess</span><span class="o">=</span><span class="n">x0_est</span><span class="p">)</span>
+
+<span class="n">mhe</span><span class="o">.</span><span class="n">quad_stage_cost</span><span class="o">.</span><span class="n">add_measurements</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.25</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
+
+<span class="n">mhe</span><span class="o">.</span><span class="n">quad_stage_cost</span><span class="o">.</span><span class="n">add_state_noise</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.001</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.001</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mf">0.001</span><span class="o">**</span><span class="mi">2</span><span class="p">)])</span>
+</pre></div>
+</div>
+</section>
+<section id="constraints">
+<h3>Constraints<a class="headerlink" href="#constraints" title="Permalink to this heading">¶</a></h3>
+<p>The class provides a method:code:<cite>set_box_constraints</cite> to set the constraints:</p>
+<p>The parameter:code:<cite>x_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">x_lb</span></code> is the upper/lower bound of the dynamical state.</p>
+<p>The parameter:code:<cite>w_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">w_lb</span></code> is the upper/lower bound of the input.</p>
+<p>The parameter:code:<cite>p_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">p_lb</span></code> is the upper/lower bound of the parameter.</p>
+<p>The parameter:code:<cite>z_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">z_lb</span></code> is the upper/lower bound of the algebraic state.</p>
+<p>For example, if we want to set the constraint that all the add_states(3 dynamical states) must be positive, the code could be :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mhe</span> <span class="o">=</span> <span class="n">MHE</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="n">mhe</span><span class="o">.</span><span class="n">set_box_constraints</span><span class="p">(</span><span class="n">x_lb</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
 <section id="non-uniform-sampling-intervals">
 <h3>Non-uniform sampling intervals<a class="headerlink" href="#non-uniform-sampling-intervals" title="Permalink to this heading">¶</a></h3>
 </section>
@@ -221,7 +298,7 @@ description of the methods refer to <a class="reference internal" href="../api/e
 </section>
 <section id="kalman-filter">
 <h2>Kalman Filter<a class="headerlink" href="#kalman-filter" title="Permalink to this heading">¶</a></h2>
-<p>The class <a class="reference internal" href="../api/estimators.html#hilo_mpc.KalmanFilter" title="hilo_mpc.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a> (alias <a class="reference internal" href="../api/estimators.html#hilo_mpc.KF" title="hilo_mpc.KF"><code class="xref py py-class docutils literal notranslate"><span class="pre">KF</span></code></a>) implements the Kalman filter developed by Rudolf E. Kálmán. To set up the Kalman filter you need an already set up <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> instance. Additionally you might want to supply a plot backend (via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_backend</span></code> keyword argument) in order to visualize the estimation results later on. At the moment only <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and <a class="reference external" href="https://bokeh.org/">Bokeh</a> are supported for plotting. The Kalman filter can be initialized as follows:</p>
+<p>The class <code class="xref py py-class docutils literal notranslate"><span class="pre">KalmanFilter</span></code> (alias <code class="xref py py-class docutils literal notranslate"><span class="pre">KF</span></code>) implements the Kalman filter developed by Rudolf E. Kálmán. To set up the Kalman filter you need an already set up <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> instance. Additionally you might want to supply a plot backend (via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_backend</span></code> keyword argument) in order to visualize the estimation results later on. At the moment only <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and <a class="reference external" href="https://bokeh.org/">Bokeh</a> are supported for plotting. The Kalman filter can be initialized as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hilo_mpc</span> <span class="kn">import</span> <span class="n">KF</span>
 
 
@@ -229,7 +306,7 @@ description of the methods refer to <a class="reference internal" href="../api/e
 <span class="n">kf</span> <span class="o">=</span> <span class="n">KF</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="s1">&#39;bokeh&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Required information, like e.g. the model dynamics or the sampling time, will be automatically extracted from the <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> instance.</p>
+<p>Required information, like e.g. the model dynamics or the sampling time, will be automatically extracted from the <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> instance.</p>
 </section>
 <section id="extended-kalman-filter">
 <h2>Extended Kalman Filter<a class="headerlink" href="#extended-kalman-filter" title="Permalink to this heading">¶</a></h2>
@@ -291,13 +368,13 @@ description of the methods refer to <a class="reference internal" href="../api/e
         };
     </script>
       <script type="text/javascript" src="../_static/documentation_options.js"></script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
       <script type="text/javascript" src="../_static/clipboard.min.js"></script>
       <script type="text/javascript" src="../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script type="text/javascript" src="../None"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
 
   
 

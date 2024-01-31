@@ -87,6 +87,7 @@ On the pipeline we have:
    examples/path_following_mpc
    examples/CSTR_Example
    examples/learn_mpc
+   examples/mhe_helicopter_example
 
 .. toctree::
    :maxdepth: 5
