@@ -49,7 +49,7 @@ to set this parameter.
 
 Objective function
 ------------------------------
-We assume that the current instant is T and the horizon is N. The objective of MHE is to find an initial state :math:`x_{T - N}` and the disturbance 
+We assume that the current instant is :math:`T` and the horizon is :math:`N`. The objective of MHE is to find an initial state :math:`x_{T - N}` and the disturbance 
 sequence :math:`\mathbf{w} = [w_{T - N}, w_{T - N + 1}, \dots, w_{T-1}]^T` so that the objective function is minimized which can be formulated as follows:
 
 .. math::

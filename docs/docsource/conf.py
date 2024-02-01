@@ -68,7 +68,6 @@ latex_elements = {
     'preamble':
         r'''
         \newcommand{\tran}{{\mkern-1.5mu\mathsf{T}}}
-        \usepackage[short,nocomma]{optidef}
         ''',
 
 }
