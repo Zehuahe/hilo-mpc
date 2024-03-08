@@ -1796,8 +1796,11 @@ class NMPC(Controller, DynamicOptimization):
            :param solver_options: Dictionary with options for the optimizer. These options are solver specific. Refer to
                the CasADi Documentation https://web.casadi.org/python-api/#nlp
            :type solver_options: dict
+           
            :return: None
        """
+        
+
         self._setup(options=options, solver_options=solver_options)
 
     def return_prediction(self):

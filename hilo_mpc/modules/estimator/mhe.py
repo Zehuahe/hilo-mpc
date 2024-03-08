@@ -92,7 +92,7 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
         self.quad_arrival_cost = MHEQuadraticCost(self._model)
 
         self._horizon = int()
-        # This will be populated with CasADi symbolics and represent the state and measurement noise respectively
+        # This will be populated with CasADi symbolics and the state and measurement noise respectively
         self._y_meas = ca.SX.sym('y', 0)
         self._w = ca.SX.sym('w', 0)
 
@@ -179,9 +179,11 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def _check_measurements(self, y, u):
         """
+        hzh - checks if the dimensions of the passed input and output measurements are consistent with 
+        the input and out dimensions set in the model
 
-        :param y:
-        :param u:
+        :param y: measurement
+        :param u: input
         :return:
         """
         y = check_and_wrap_to_list(y)
@@ -200,6 +202,7 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def _check_mhe_is_well_posed(self):
         """
+        hzh - checks some important things of mhe. (cost function, horizon length and the consistency between the dimensions of the state boundary and the model state dimensions)
 
         :return:
         """
@@ -224,7 +227,7 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def _scale_problem(self):
         """
-
+        hzh - scale the state, input and parameter of the boundary and model 
         :return:
         """
         self._x_ub = scale_vector(self._x_ub, self._x_scaling)
@@ -417,7 +420,12 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def setup(self, options=None, nlp_opts=None, solver='ipopt'):
         """
+        hzh - Sets up the optimization problem of mhe
 
+        :param options: set the options that modify how optimization problem is set
+        :param nlp_opts:
+        :param solver: set the solver of nlp problem
+        
         :return:
         """
         if not self._scaling_is_set:
@@ -934,15 +942,16 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
     def set_box_constraints(self, x_ub=None, x_lb=None, w_ub=None, w_lb=None, p_lb=None, p_ub=None, z_ub=None,
                             z_lb=None):
         """
+        hzh - Sets box constraints of the model's variables
 
-        :param x_ub:
-        :param x_lb:
-        :param w_ub:
-        :param w_lb:
-        :param p_lb:
-        :param p_ub:
-        :param z_ub:
-        :param z_lb:
+        :param x_ub: upper bound on states.
+        :param x_lb: lower bound on  states
+        :param u_ub: upper bound on inputs
+        :param u_lb: lower bound on inputs
+        :param y_ub: upper bound on measurements
+        :param y_lb: lower bound on measurements
+        :param z_ub: upper bound on algebraic states
+        :param z_lb: lower bound on algebraic states
         :return:
         """
         if x_ub is not None:
@@ -1069,10 +1078,11 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def set_aux_nonlinear_constraints(self, aux_nl_const=None, ub=None, lb=None):
         """
+        hzh - Sets the auxiliary nonlinear constraints and the lower and upper bound
 
-        :param aux_nl_const:
-        :param ub:
-        :param lb:
+        :param aux_nl_const: auxiliary nonlinear constraints
+        :param ub: upper bound
+        :param lb: lower bound
         :return:
         """
         if None not in [aux_nl_const, ub, lb]:
@@ -1213,8 +1223,9 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def return_mhe_estimation(self):
         """
+        hzh - returns the estimated state and state noise
 
-        :return:
+        :return: x_pred, w_pred
         """
         if self._nlp_solution is not None:
             x_pred = np.zeros((self._model.n_x, self._horizon + 1))
@@ -1228,7 +1239,7 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
                 w_pred = None
             return x_pred, w_pred
         else:
-            warnings.warn("There is still no mpc solution available. Run mpc.optimize() to get one.")
+            warnings.warn("There is still no mhe solution available. Run mhe.estimate() to get one.")
             return None, None
 
     @property

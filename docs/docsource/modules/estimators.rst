@@ -4,7 +4,7 @@
 Observer module
 =========================
 The |project_name| Observer module contains several state (and parameter) observers.
-observers are used to infer states and parameters from measurements. For a more detailed
+Observers are used to infer states and parameters from measurements. For a more detailed
 description of the methods refer to :ref:`the API <observer_autodoc>`.
 
 The Observer module contains the following classes:
@@ -26,7 +26,7 @@ state of the system. In the toolbox, the class MHE can set a Moving Horizon Esti
 2. An objective function.
 3. constraints (optional)
 
-Horizon
+Horizon length 
 ------------------------------
 To achieve an effective state estimate, the ideal approach involves considering all past measurements from the initial 
 time up to the present, leading to what is referred to as a full information estimator. Unfortunately, the computational 
@@ -53,8 +53,12 @@ We assume that the current instant is :math:`T` and the horizon is :math:`N`. Th
 sequence :math:`\mathbf{w} = [w_{T - N}, w_{T - N + 1}, \dots, w_{T-1}]^T` so that the objective function is minimized which can be formulated as follows:
 
 .. math::
+   &\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}}\quad\Phi_T\\
+
+The objective function is constructed as follows:
+
+.. math::
  \begin{aligned}
- &\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}} \quad\Phi_T\\
  \hspace{3em}\Phi_T &= Z_{T-N}\left( x_{T-N} \right) + \sum_{k = T - N}^{T - 1} L\left( v_k,w_k\right) \\
        &= \left\| {x_{T-N} - \bar{x}_{T-N}} \right\|_{\Pi^{-1}}^{2} + \sum_{k = T - N}^{T - 1}\left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2} \\
        &\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
@@ -96,15 +100,15 @@ the covariance matrix of the initial guess is :math:`\begin{bmatrix} (0.5)^2 & 0
 
 Constraints
 ------------------------------
-The class provides a method:code:`set_box_constraints` to set the constraints:
+The class provides a method :code:`set_box_constraints` to set the constraints:
 
-The parameter:code:`x_ub` /:code:`x_lb` is the upper/lower bound of the dynamical state.
+The parameter :code:`x_ub` /:code:`x_lb` is the upper/lower bound of the dynamical state.
 
-The parameter:code:`w_ub` /:code:`w_lb` is the upper/lower bound of the input.
+The parameter :code:`w_ub` /:code:`w_lb` is the upper/lower bound of the input.
 
-The parameter:code:`p_ub` /:code:`p_lb` is the upper/lower bound of the parameter.
+The parameter :code:`p_ub` /:code:`p_lb` is the upper/lower bound of the parameter.
 
-The parameter:code:`z_ub` /:code:`z_lb` is the upper/lower bound of the algebraic state.
+The parameter :code:`z_ub` /:code:`z_lb` is the upper/lower bound of the algebraic state.
 
 For example, if we want to set the constraint that all the add_states(3 dynamical states) must be positive, the code could be :
 

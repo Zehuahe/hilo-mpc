@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>hilo_mpc.modules.machine_learning.gp.kernel &mdash; HILO-MPC 1.0 documentation</title>
+  <title>hilo_mpc.modules.machine_learning.gp.kernel &mdash; HILO-MPC 1.0.1 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
         <link rel="index" title="Index"
               href="../../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../../search.html"/>
-    <link rel="top" title="HILO-MPC 1.0 documentation" href="../../../../../index.html"/>
+    <link rel="top" title="HILO-MPC 1.0.1 documentation" href="../../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../../index.html"/> 
 
   
@@ -64,9 +64,6 @@
             <a href="../../../../../index.html" class="icon icon-home"> HILO-MPC
           
 
-          
-            
-            <img src="../../../../../_static/hilo_logo_short_2.png" class="logo" />
           
           </a>
 
@@ -107,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/path_following_mpc.html">Path following vs Trajectory Tracking MPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/CSTR_Example.html">CSTR Reactor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../examples/learn_mpc.html">Learning an MPC controller with a NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../examples/mhe_helicopter_example.html">CE 150 Helicopter</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
@@ -234,7 +232,7 @@
 
 
 <div class="viewcode-block" id="Kernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Kernel">[docs]</a><span class="k">class</span> <span class="nc">Kernel</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Kernel base class</span>
 
 <span class="sd">    This base class implements the basic methods that are used for all basic kernels, e.g. dot product kernels and</span>
@@ -251,38 +249,38 @@
 <span class="sd">    :type active_dims: int, list of int, optional</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IntArray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">active_dims</span> <span class="o">=</span> <span class="n">active_dims</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Cov</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Sum&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Addition method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Addition method&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Cov</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Product&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Multiplication method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Multiplication method&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">:</span> <span class="n">Numeric</span><span class="p">,</span> <span class="n">modulo</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Power&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Power method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Power method&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Cov</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Sum&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Addition method (from the right side)&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Addition method (from the right side)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Sum</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Cov</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Product&#39;</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Multiplication method (from the right side)&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Multiplication method (from the right side)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Product</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;String representation method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation method&quot;&quot;&quot;</span>
         <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with: </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">for</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> </span><span class="si">{</span><span class="n">attribute</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">return</span> <span class="n">message</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">Array</span><span class="p">,</span> <span class="n">X_bar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Calling method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calling method&quot;&quot;&quot;</span>
         <span class="n">X_val</span> <span class="o">=</span> <span class="n">X</span>
         <span class="n">X_bar_val</span> <span class="o">=</span> <span class="n">X_bar</span>
 
@@ -328,7 +326,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">hyperparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Param</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all hyperparameters in the kernel.</span>
 
 <span class="sd">        This attribute can be easily used to access specific attributes of all hyperparameters in generator expressions</span>
@@ -342,7 +340,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">hyperparameter_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -354,7 +352,7 @@
 
 <div class="viewcode-block" id="Kernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Kernel.get_covariance_function">[docs]</a>    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -364,7 +362,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="Kernel.get_covariance_matrix"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Kernel.get_covariance_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">covariance_function</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">X_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param covariance_function:</span>
 <span class="sd">        :param X:</span>
@@ -392,7 +390,7 @@
         <span class="k">return</span> <span class="n">covariance_matrix</span></div>
 
 <div class="viewcode-block" id="Kernel.is_bounded"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Kernel.is_bounded">[docs]</a>    <span class="k">def</span> <span class="nf">is_bounded</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -405,7 +403,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Kernel.update"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Kernel.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param args:</span>
 <span class="sd">        :return:</span>
@@ -414,7 +412,7 @@
 
 <div class="viewcode-block" id="Kernel.constant"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Kernel.constant">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">constant</span><span class="p">(</span><span class="n">bias</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param bias:</span>
 <span class="sd">        :param bounds:</span>
@@ -430,7 +428,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -450,7 +448,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -470,7 +468,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -490,7 +488,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -511,7 +509,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -533,7 +531,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param degree:</span>
 <span class="sd">        :param active_dims:</span>
@@ -554,7 +552,7 @@
             <span class="n">offset</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param degree:</span>
 <span class="sd">        :param active_dims:</span>
@@ -572,7 +570,7 @@
             <span class="n">signal_variance</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -588,7 +586,7 @@
             <span class="n">weight_variance</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -607,7 +605,7 @@
             <span class="n">period</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Cov</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param active_dims:</span>
 <span class="sd">        :param signal_variance:</span>
@@ -621,7 +619,7 @@
 
 
 <div class="viewcode-block" id="ConstantKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.ConstantKernel">[docs]</a><span class="k">class</span> <span class="nc">ConstantKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constant covariance function</span>
 
 <span class="sd">    :param bias:</span>
@@ -636,7 +634,7 @@
             <span class="n">bias</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="n">hyper_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -650,7 +648,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">Hyperparameter</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s1">.bias&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">bias</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ConstantKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.ConstantKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Covariance function of constant as follows:</span>
 <span class="sd">            bias^2</span>
 
@@ -673,7 +671,7 @@
 
 
 <span class="k">class</span> <span class="nc">StationaryKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base for stationary kernels</span>
 
 <span class="sd">    In the isotropic form the characteristic length scale is the same for every input dimensions. By parameterization</span>
@@ -697,7 +695,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">)</span>
 
         <span class="n">hyper_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -723,7 +721,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">length_scales</span> <span class="o">=</span> <span class="n">Hyperparameter</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s1">.length_scales&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_parameterized_length_scales</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimension_input_space</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">log_length_scales</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The parameterized notation allows for automatic relevance detection if the length scales are given as vector</span>
 <span class="sd">        (the kernel is considered anisotropic).</span>
 
@@ -742,7 +740,7 @@
         <span class="k">return</span> <span class="n">M</span>
 
     <span class="k">def</span> <span class="nf">is_isotropic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -750,7 +748,7 @@
 
 
 <span class="k">class</span> <span class="nc">GammaExponentialKernel</span><span class="p">(</span><span class="n">StationaryKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gamma-exponential covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -780,7 +778,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span> <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -835,7 +833,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.</span>
 
     <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Covariance function of gamma exponential as follows:</span>
 
 <span class="sd">        .. math::</span>
@@ -889,7 +887,7 @@
 
 
 <div class="viewcode-block" id="SquaredExponentialKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.SquaredExponentialKernel">[docs]</a><span class="k">class</span> <span class="nc">SquaredExponentialKernel</span><span class="p">(</span><span class="n">GammaExponentialKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Squared exponential covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -913,7 +911,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">signal_variance</span><span class="o">=</span><span class="n">signal_variance</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span> <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span>
                          <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
@@ -922,7 +920,7 @@
 
 
 <div class="viewcode-block" id="MaternKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.MaternKernel">[docs]</a><span class="k">class</span> <span class="nc">MaternKernel</span><span class="p">(</span><span class="n">StationaryKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base for Matérn class of covariance functions</span>
 
 <span class="sd">    :param p:</span>
@@ -949,7 +947,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span> <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -968,7 +966,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">p</span>
 
 <div class="viewcode-block" id="MaternKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.MaternKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -1014,7 +1012,7 @@
 
 
 <div class="viewcode-block" id="ExponentialKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.ExponentialKernel">[docs]</a><span class="k">class</span> <span class="nc">ExponentialKernel</span><span class="p">(</span><span class="n">MaternKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exponential covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1038,13 +1036,13 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">signal_variance</span><span class="o">=</span><span class="n">signal_variance</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span>
                          <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Matern32Kernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Matern32Kernel">[docs]</a><span class="k">class</span> <span class="nc">Matern32Kernel</span><span class="p">(</span><span class="n">MaternKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Matérn covariance function where :math:`{\\nu}` = 3/2</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1068,13 +1066,13 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">signal_variance</span><span class="o">=</span><span class="n">signal_variance</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span>
                          <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Matern52Kernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.Matern52Kernel">[docs]</a><span class="k">class</span> <span class="nc">Matern52Kernel</span><span class="p">(</span><span class="n">MaternKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Matérn covariance function where :math:`{\\nu}` = 5/2</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1098,13 +1096,13 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">signal_variance</span><span class="o">=</span><span class="n">signal_variance</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span>
                          <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="RationalQuadraticKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.RationalQuadraticKernel">[docs]</a><span class="k">class</span> <span class="nc">RationalQuadraticKernel</span><span class="p">(</span><span class="n">StationaryKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rational quadratic covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1131,7 +1129,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">length_scales</span><span class="o">=</span><span class="n">length_scales</span><span class="p">,</span> <span class="n">ard</span><span class="o">=</span><span class="n">ard</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -1157,7 +1155,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">Hyperparameter</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s1">.alpha&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RationalQuadraticKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.RationalQuadraticKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Covariance function of rational quadratic as follows:</span>
 
 <span class="sd">        .. math::</span>
@@ -1191,7 +1189,7 @@
 
 
 <div class="viewcode-block" id="PiecewisePolynomialKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.PiecewisePolynomialKernel">[docs]</a><span class="k">class</span> <span class="nc">PiecewisePolynomialKernel</span><span class="p">(</span><span class="n">StationaryKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Piecewise polynomial covariance function with compact support</span>
 
 <span class="sd">    :param degree:</span>
@@ -1218,7 +1216,7 @@
             <span class="n">ard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">degree</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The parameter &#39;degree&#39; has to be one of the following integers: 0, 1, 2, 3&quot;</span><span class="p">)</span>
 
@@ -1241,7 +1239,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1254,7 +1252,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_q</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="PiecewisePolynomialKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.PiecewisePolynomialKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -1297,7 +1295,7 @@
 
 
 <div class="viewcode-block" id="DotProductKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.DotProductKernel">[docs]</a><span class="k">class</span> <span class="nc">DotProductKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base for all dot product kernels</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1318,7 +1316,7 @@
             <span class="n">offset</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -1345,7 +1343,7 @@
 
 
 <div class="viewcode-block" id="PolynomialKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.PolynomialKernel">[docs]</a><span class="k">class</span> <span class="nc">PolynomialKernel</span><span class="p">(</span><span class="n">DotProductKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Polynomial covariance function</span>
 
 <span class="sd">    :param degree:</span>
@@ -1369,14 +1367,14 @@
             <span class="n">offset</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">signal_variance</span><span class="o">=</span><span class="n">signal_variance</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">degree</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1387,7 +1385,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="PolynomialKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.PolynomialKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Covariance function of polynomial as follows:</span>
 <span class="sd">            (sigma_bias^2 + sigma_signal^2 * (x dot x_bar))^p</span>
 
@@ -1422,7 +1420,7 @@
 
 
 <div class="viewcode-block" id="LinearKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.LinearKernel">[docs]</a><span class="k">class</span> <span class="nc">LinearKernel</span><span class="p">(</span><span class="n">PolynomialKernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Linear covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1440,14 +1438,14 @@
             <span class="n">signal_variance</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">,</span> <span class="n">signal_variance</span><span class="o">=</span><span class="n">signal_variance</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mf">0.</span></div>
 
 
 <div class="viewcode-block" id="NeuralNetworkKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.NeuralNetworkKernel">[docs]</a><span class="k">class</span> <span class="nc">NeuralNetworkKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Neural network covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1468,7 +1466,7 @@
             <span class="n">weight_variance</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -1494,7 +1492,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weight_variance</span> <span class="o">=</span> <span class="n">Hyperparameter</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s1">.weight_variance&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">weight_variance</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="NeuralNetworkKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.NeuralNetworkKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -1520,7 +1518,7 @@
 
 
 <div class="viewcode-block" id="PeriodicKernel"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.PeriodicKernel">[docs]</a><span class="k">class</span> <span class="nc">PeriodicKernel</span><span class="p">(</span><span class="n">Kernel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Periodic covariance function</span>
 
 <span class="sd">    :param active_dims:</span>
@@ -1544,7 +1542,7 @@
             <span class="n">period</span><span class="p">:</span> <span class="n">Numeric</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
             <span class="n">bounds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bounds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">active_dims</span><span class="o">=</span><span class="n">active_dims</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">bounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
@@ -1579,7 +1577,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">Hyperparameter</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">acronym</span><span class="si">}</span><span class="s1">.period&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">period</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PeriodicKernel.get_covariance_function"><a class="viewcode-back" href="../../../../../api/learning.html#hilo_mpc.PeriodicKernel.get_covariance_function">[docs]</a>    <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Covariance function of exponential sine as follows:</span>
 
 <span class="sd">        .. math::</span>
@@ -1611,7 +1609,7 @@
 
 
 <span class="k">class</span> <span class="nc">KernelOperator</span><span class="p">(</span><span class="n">Kernel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Kernel operator base class</span>
 
 <span class="sd">    There are three basic operations to composite kernels which preserve their properties as valid covariance matrices.</span>
@@ -1621,7 +1619,7 @@
 <span class="sd">    :param kernel_2:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kernel_1</span><span class="p">:</span> <span class="n">Cov</span><span class="p">,</span> <span class="n">kernel_2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Cov</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">kernel_1</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kernel_1</span><span class="p">)</span>
@@ -1633,7 +1631,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">hyperparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Param</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all hyperparameters in the kernel.</span>
 
 <span class="sd">        This attribute can be easily used to access specific attributes of all hyperparameters in generator expressions</span>
@@ -1646,7 +1644,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">hyperparameter_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1656,7 +1654,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_1</span><span class="o">.</span><span class="n">hyperparameter_names</span>
 
     <span class="k">def</span> <span class="nf">disambiguate_hyperparameter_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1739,7 +1737,7 @@
 
 
 <span class="k">class</span> <span class="nc">Scale</span><span class="p">(</span><span class="n">KernelOperator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kernel</span><span class="p">:</span> <span class="n">Cov</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="n">Numeric</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">kernel_2</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
@@ -1747,7 +1745,7 @@
 
 
 <span class="k">class</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">KernelOperator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sum operator for covariance functions</span>
 
 <span class="sd">    :param kernel_1:</span>
@@ -1756,7 +1754,7 @@
 <span class="sd">    :type kernel_2:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -1781,7 +1779,7 @@
 
 
 <span class="k">class</span> <span class="nc">Product</span><span class="p">(</span><span class="n">KernelOperator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Product operator for covariance functions</span>
 
 <span class="sd">    :param kernel_1:</span>
@@ -1790,7 +1788,7 @@
 <span class="sd">    :type kernel_2:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -1815,7 +1813,7 @@
 
 
 <span class="k">class</span> <span class="nc">Power</span><span class="p">(</span><span class="n">KernelOperator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Power operator for covariance functions</span>
 
 <span class="sd">    :param kernel:</span>
@@ -1829,7 +1827,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="n">power</span>
 
     <span class="k">def</span> <span class="nf">get_covariance_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">x_bar</span><span class="p">:</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">active_dims</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ca</span><span class="o">.</span><span class="n">Function</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x:</span>
 <span class="sd">        :param x_bar:</span>
@@ -1854,11 +1852,11 @@
 
 
 <span class="k">class</span> <span class="nc">Warp</span><span class="p">(</span><span class="n">KernelOperator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
 
 <span class="k">def</span> <span class="nf">_clean_input_matrices</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">Array</span><span class="p">,</span> <span class="n">X_bar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Arbitrary array-like input matrix/matrices are converted to CasADi SX symbols. In the case of a single input</span>
 <span class="sd">    matrix the resulting SX symbols are disambiguated, meaning they have unique CasADi identifiers.</span>
 
@@ -1885,7 +1883,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mahalanobis_distance_squared</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    :param x:</span>
 <span class="sd">    :param y:</span>
@@ -1946,7 +1944,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../../',
-            VERSION:'1.0',
+            VERSION:'1.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1954,10 +1952,8 @@
         };
     </script>
       <script type="text/javascript" src="../../../../../_static/documentation_options.js"></script>
-      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
       <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../../_static/sphinx_highlight.js"></script>
       <script type="text/javascript" src="../../../../../_static/clipboard.min.js"></script>
       <script type="text/javascript" src="../../../../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>

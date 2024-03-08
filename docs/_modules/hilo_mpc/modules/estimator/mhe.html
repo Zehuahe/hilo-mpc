@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>hilo_mpc.modules.estimator.mhe &mdash; HILO-MPC 1.0 documentation</title>
+  <title>hilo_mpc.modules.estimator.mhe &mdash; HILO-MPC 1.0.1 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
         <link rel="index" title="Index"
               href="../../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../../search.html"/>
-    <link rel="top" title="HILO-MPC 1.0 documentation" href="../../../../index.html"/>
+    <link rel="top" title="HILO-MPC 1.0.1 documentation" href="../../../../index.html"/>
         <link rel="up" title="Module code" href="../../../index.html"/> 
 
   
@@ -64,9 +64,6 @@
             <a href="../../../../index.html" class="icon icon-home"> HILO-MPC
           
 
-          
-            
-            <img src="../../../../_static/hilo_logo_short_2.png" class="logo" />
           
           </a>
 
@@ -107,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/path_following_mpc.html">Path following vs Trajectory Tracking MPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/CSTR_Example.html">CSTR Reactor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/learn_mpc.html">Learning an MPC controller with a NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/mhe_helicopter_example.html">CE 150 Helicopter</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
@@ -223,7 +221,7 @@
 
 
 <div class="viewcode-block" id="MovingHorizonEstimator"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator">[docs]</a><span class="k">class</span> <span class="nc">MovingHorizonEstimator</span><span class="p">(</span><span class="n">Estimator</span><span class="p">,</span> <span class="n">DynamicOptimization</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Moving Horizon Estimator (MHE) class for state and parameter estimation.</span>
 
 <span class="sd">    :param model: HILO-MPC model object that will be used in the estimator.</span>
@@ -248,7 +246,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="n">plot_backend</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_options_is_set</span> <span class="o">=</span> <span class="kc">False</span>
@@ -279,7 +277,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">quad_arrival_cost</span> <span class="o">=</span> <span class="n">MHEQuadraticCost</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_horizon</span> <span class="o">=</span> <span class="nb">int</span><span class="p">()</span>
-        <span class="c1"># This will be populated with CasADi symbolics and represent the state and measurement noise respectively</span>
+        <span class="c1"># This will be populated with CasADi symbolics and the state and measurement noise respectively</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_y_meas</span> <span class="o">=</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_w</span> <span class="o">=</span> <span class="n">ca</span><span class="o">.</span><span class="n">SX</span><span class="o">.</span><span class="n">sym</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -333,14 +331,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">w_scaling</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">_update_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="s1">&#39;MHE&#39;</span>
 
     <span class="k">def</span> <span class="nf">_define_cost_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates the SX expressions for the stage or terminal cost</span>
 
 <span class="sd">        :return:</span>
@@ -365,10 +363,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_arrival_term_flag</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">_check_measurements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - checks if the dimensions of the passed input and output measurements are consistent with </span>
+<span class="sd">        the input and out dimensions set in the model</span>
 
-<span class="sd">        :param y:</span>
-<span class="sd">        :param u:</span>
+<span class="sd">        :param y: measurement</span>
+<span class="sd">        :param u: input</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">check_and_wrap_to_list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -386,7 +386,8 @@
         <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span>
 
     <span class="k">def</span> <span class="nf">_check_mhe_is_well_posed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - checks some important things of mhe. (cost function, horizon length and the consistency between the dimensions of the state boundary and the model state dimensions)</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -410,8 +411,8 @@
                              <span class="sa">f</span><span class="s2">&quot;the model has </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_x</span><span class="si">}</span><span class="s2"> states&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_scale_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - scale the state, input and parameter of the boundary and model </span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_x_ub</span> <span class="o">=</span> <span class="n">scale_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_ub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_scaling</span><span class="p">)</span>
@@ -433,7 +434,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_p_scaling</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_update_arrival_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The state guess in the arrival cost can be updated automatically depending on the method.</span>
 
 <span class="sd">        :return:</span>
@@ -448,7 +449,7 @@
 
     <span class="k">def</span> <span class="nf">_update_arrival_param</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The parameter guess in the arrival cost can be updated automatically</span>
 
 <span class="sd">        :return:</span>
@@ -459,7 +460,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quad_arrival_cost</span><span class="o">.</span><span class="n">p_guess</span>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.add_measurements"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.add_measurements">[docs]</a>    <span class="k">def</span> <span class="nf">add_measurements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_meas</span><span class="p">,</span> <span class="n">u_meas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This adds measurements that will appended to the measurements history.</span>
 <span class="sd">        At the moment it is assumed that measurements are available ata  constant time interval.</span>
 
@@ -496,7 +497,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_u_history</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.estimate"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_arrival</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_arrival</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute MHE</span>
 
 <span class="sd">        :param x_arrival:</span>
@@ -603,8 +604,13 @@
             <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.setup"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nlp_opts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;ipopt&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - Sets up the optimization problem of mhe</span>
 
+<span class="sd">        :param options: set the options that modify how optimization problem is set</span>
+<span class="sd">        :param nlp_opts:</span>
+<span class="sd">        :param solver: set the solver of nlp problem</span>
+<span class="sd">        </span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scaling_is_set</span><span class="p">:</span>
@@ -977,7 +983,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">solver</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_nlp_options"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_nlp_options">[docs]</a>    <span class="k">def</span> <span class="nf">set_nlp_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the options that modify how the mpc problem is set</span>
 
 <span class="sd">        :param args:</span>
@@ -1051,7 +1057,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_options</span> <span class="o">=</span> <span class="n">default_opts</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_scaling"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_scaling">[docs]</a>    <span class="k">def</span> <span class="nf">set_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_scaling</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w_scaling</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_scaling</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_scaling</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Scales the states and input. This is important for systems with large difference of order of magnitude in</span>
 <span class="sd">        states and inputs.</span>
 
@@ -1096,7 +1102,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_scaling_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_time_varying_parameters"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_time_varying_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">set_time_varying_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_varying_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the time-varying parameters for the estimator.</span>
 <span class="sd">        The estimator will expect these as an input at every iteration</span>
 
@@ -1120,16 +1126,17 @@
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_box_constraints"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_box_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">set_box_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="n">z_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - Sets box constraints of the model&#39;s variables</span>
 
-<span class="sd">        :param x_ub:</span>
-<span class="sd">        :param x_lb:</span>
-<span class="sd">        :param w_ub:</span>
-<span class="sd">        :param w_lb:</span>
-<span class="sd">        :param p_lb:</span>
-<span class="sd">        :param p_ub:</span>
-<span class="sd">        :param z_ub:</span>
-<span class="sd">        :param z_lb:</span>
+<span class="sd">        :param x_ub: upper bound on states.</span>
+<span class="sd">        :param x_lb: lower bound on  states</span>
+<span class="sd">        :param u_ub: upper bound on inputs</span>
+<span class="sd">        :param u_lb: lower bound on inputs</span>
+<span class="sd">        :param y_ub: upper bound on measurements</span>
+<span class="sd">        :param y_lb: lower bound on measurements</span>
+<span class="sd">        :param z_ub: upper bound on algebraic states</span>
+<span class="sd">        :param z_lb: lower bound on algebraic states</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x_ub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1190,7 +1197,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_box_constraints_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_initial_guess"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_initial_guess">[docs]</a>    <span class="k">def</span> <span class="nf">set_initial_guess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_guess</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w_guess</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_guess</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_guess</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets initial guess for the optimizer when no other information of the states or inputs are available.</span>
 
 <span class="sd">        :param x_guess: list of optimal dynamical state guess</span>
@@ -1255,11 +1262,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_initial_guess_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_aux_nonlinear_constraints"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_aux_nonlinear_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">set_aux_nonlinear_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aux_nl_const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - Sets the auxiliary nonlinear constraints and the lower and upper bound</span>
 
-<span class="sd">        :param aux_nl_const:</span>
-<span class="sd">        :param ub:</span>
-<span class="sd">        :param lb:</span>
+<span class="sd">        :param aux_nl_const: auxiliary nonlinear constraints</span>
+<span class="sd">        :param ub: upper bound</span>
+<span class="sd">        :param lb: lower bound</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="kc">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">aux_nl_const</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="n">lb</span><span class="p">]:</span>
@@ -1275,7 +1283,7 @@
 
 <div class="viewcode-block" id="MovingHorizonEstimator.plot_mhe_estimation"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.plot_mhe_estimation">[docs]</a>    <span class="k">def</span> <span class="nf">plot_mhe_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name_file</span><span class="o">=</span><span class="s1">&#39;mhe_estimation.html&#39;</span><span class="p">,</span>
                             <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extras</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extras_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">format_figure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param save_plot: if True plot will be saved under &#39;plot_dir/name_file.html&#39; if they are declared, otherwise in</span>
 <span class="sd">            current directory</span>
@@ -1399,9 +1407,10 @@
                 <span class="n">save</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MovingHorizonEstimator.return_mhe_estimation"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.return_mhe_estimation">[docs]</a>    <span class="k">def</span> <span class="nf">return_mhe_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        hzh - returns the estimated state and state noise</span>
 
-<span class="sd">        :return:</span>
+<span class="sd">        :return: x_pred, w_pred</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_solution</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">x_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
@@ -1420,7 +1429,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">has_state_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1469,7 +1478,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../../',
-            VERSION:'1.0',
+            VERSION:'1.0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -1477,10 +1486,8 @@
         };
     </script>
       <script type="text/javascript" src="../../../../_static/documentation_options.js"></script>
-      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
       <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/sphinx_highlight.js"></script>
       <script type="text/javascript" src="../../../../_static/clipboard.min.js"></script>
       <script type="text/javascript" src="../../../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>

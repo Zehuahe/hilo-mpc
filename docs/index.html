@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -324,7 +324,7 @@ estimation problems.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules/estimators.html">Observer module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules/estimators.html#moving-horizon-estimator">Moving Horizon Estimator</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/estimators.html#horizon">Horizon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/estimators.html#horizon-length">Horizon length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/estimators.html#objective-function">Objective function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/estimators.html#constraints">Constraints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules/estimators.html#non-uniform-sampling-intervals">Non-uniform sampling intervals</a></li>
@@ -342,10 +342,374 @@ estimation problems.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api/controllers.html">Controllers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/learning.html">Machine Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/modelling.html">Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/estimators.html">Observers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/controllers.html">Controllers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC"><code class="docutils literal notranslate"><span class="pre">NMPC</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.check_consistency"><code class="docutils literal notranslate"><span class="pre">NMPC.check_consistency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.create_path_variable"><code class="docutils literal notranslate"><span class="pre">NMPC.create_path_variable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.get_reference"><code class="docutils literal notranslate"><span class="pre">NMPC.get_reference()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.get_time_variable"><code class="docutils literal notranslate"><span class="pre">NMPC.get_time_variable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.is_setup"><code class="docutils literal notranslate"><span class="pre">NMPC.is_setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.minimize_final_time"><code class="docutils literal notranslate"><span class="pre">NMPC.minimize_final_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.optimize"><code class="docutils literal notranslate"><span class="pre">NMPC.optimize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.plot_iterations"><code class="docutils literal notranslate"><span class="pre">NMPC.plot_iterations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.plot_prediction"><code class="docutils literal notranslate"><span class="pre">NMPC.plot_prediction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.reset_solution"><code class="docutils literal notranslate"><span class="pre">NMPC.reset_solution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.return_prediction"><code class="docutils literal notranslate"><span class="pre">NMPC.return_prediction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_box_constraints"><code class="docutils literal notranslate"><span class="pre">NMPC.set_box_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_compiler"><code class="docutils literal notranslate"><span class="pre">NMPC.set_compiler()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_custom_constraints_function"><code class="docutils literal notranslate"><span class="pre">NMPC.set_custom_constraints_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">NMPC.set_initial_guess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_nlp_options"><code class="docutils literal notranslate"><span class="pre">NMPC.set_nlp_options()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_nlp_solver"><code class="docutils literal notranslate"><span class="pre">NMPC.set_nlp_solver()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_quadratic_stage_cost"><code class="docutils literal notranslate"><span class="pre">NMPC.set_quadratic_stage_cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_quadratic_terminal_cost"><code class="docutils literal notranslate"><span class="pre">NMPC.set_quadratic_terminal_cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_sampling_interval"><code class="docutils literal notranslate"><span class="pre">NMPC.set_sampling_interval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_scaling"><code class="docutils literal notranslate"><span class="pre">NMPC.set_scaling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_solver_opts"><code class="docutils literal notranslate"><span class="pre">NMPC.set_solver_opts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_stage_constraints"><code class="docutils literal notranslate"><span class="pre">NMPC.set_stage_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_terminal_constraints"><code class="docutils literal notranslate"><span class="pre">NMPC.set_terminal_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.set_time_varying_parameters"><code class="docutils literal notranslate"><span class="pre">NMPC.set_time_varying_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.setup"><code class="docutils literal notranslate"><span class="pre">NMPC.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.compiler"><code class="docutils literal notranslate"><span class="pre">NMPC.compiler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.control_horizon"><code class="docutils literal notranslate"><span class="pre">NMPC.control_horizon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.current_time"><code class="docutils literal notranslate"><span class="pre">NMPC.current_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.display"><code class="docutils literal notranslate"><span class="pre">NMPC.display</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.horizon"><code class="docutils literal notranslate"><span class="pre">NMPC.horizon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.id"><code class="docutils literal notranslate"><span class="pre">NMPC.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.initial_time"><code class="docutils literal notranslate"><span class="pre">NMPC.initial_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.n_iterations"><code class="docutils literal notranslate"><span class="pre">NMPC.n_iterations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.n_of_path_vars"><code class="docutils literal notranslate"><span class="pre">NMPC.n_of_path_vars</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.n_tvp"><code class="docutils literal notranslate"><span class="pre">NMPC.n_tvp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.obj_fun"><code class="docutils literal notranslate"><span class="pre">NMPC.obj_fun</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.obj_function_stage_cost"><code class="docutils literal notranslate"><span class="pre">NMPC.obj_function_stage_cost</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.prediction_horizon"><code class="docutils literal notranslate"><span class="pre">NMPC.prediction_horizon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.sampling_interval"><code class="docutils literal notranslate"><span class="pre">NMPC.sampling_interval</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.solution"><code class="docutils literal notranslate"><span class="pre">NMPC.solution</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.time_var"><code class="docutils literal notranslate"><span class="pre">NMPC.time_var</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.type"><code class="docutils literal notranslate"><span class="pre">NMPC.type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.u_lb"><code class="docutils literal notranslate"><span class="pre">NMPC.u_lb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.u_ub"><code class="docutils literal notranslate"><span class="pre">NMPC.u_ub</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.x_lb"><code class="docutils literal notranslate"><span class="pre">NMPC.x_lb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.NMPC.x_ub"><code class="docutils literal notranslate"><span class="pre">NMPC.x_ub</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC"><code class="docutils literal notranslate"><span class="pre">LMPC</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.optimize"><code class="docutils literal notranslate"><span class="pre">LMPC.optimize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.return_prediction"><code class="docutils literal notranslate"><span class="pre">LMPC.return_prediction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.set_custom_constraints_function"><code class="docutils literal notranslate"><span class="pre">LMPC.set_custom_constraints_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">LMPC.set_initial_guess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.set_stage_constraints"><code class="docutils literal notranslate"><span class="pre">LMPC.set_stage_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.setup"><code class="docutils literal notranslate"><span class="pre">LMPC.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.LMPC.prediction_horizon"><code class="docutils literal notranslate"><span class="pre">LMPC.prediction_horizon</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID"><code class="docutils literal notranslate"><span class="pre">PID</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.call"><code class="docutils literal notranslate"><span class="pre">PID.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.setup"><code class="docutils literal notranslate"><span class="pre">PID.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.derivative_gain"><code class="docutils literal notranslate"><span class="pre">PID.derivative_gain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.derivative_time"><code class="docutils literal notranslate"><span class="pre">PID.derivative_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.integral_gain"><code class="docutils literal notranslate"><span class="pre">PID.integral_gain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.integral_time"><code class="docutils literal notranslate"><span class="pre">PID.integral_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.k_d"><code class="docutils literal notranslate"><span class="pre">PID.k_d</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.k_i"><code class="docutils literal notranslate"><span class="pre">PID.k_i</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.k_p"><code class="docutils literal notranslate"><span class="pre">PID.k_p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.proportional_gain"><code class="docutils literal notranslate"><span class="pre">PID.proportional_gain</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.s_p"><code class="docutils literal notranslate"><span class="pre">PID.s_p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.set_point"><code class="docutils literal notranslate"><span class="pre">PID.set_point</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.t_d"><code class="docutils literal notranslate"><span class="pre">PID.t_d</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/controllers.html#hilo_mpc.PID.t_i"><code class="docutils literal notranslate"><span class="pre">PID.t_i</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/learning.html">Machine Learning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.ANN"><code class="docutils literal notranslate"><span class="pre">ANN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.add_data_set"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.add_data_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.add_layers"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.add_layers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.build_graph"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.build_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.close_tensorboard"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.close_tensorboard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.is_setup"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.is_setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.is_trained"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.is_trained()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.predict"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.predict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.prepare_data_set"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.prepare_data_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.set_input_scaling"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.set_input_scaling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.set_output_scaling"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.set_output_scaling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.set_scaling"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.set_scaling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.setup"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.show_tensorboard"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.show_tensorboard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.train"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.train()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.backend"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.backend</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.depth"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.depth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.features"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.features</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.labels"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.labels</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.learning_rate"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.learning_rate</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.loss"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.loss</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.metric"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.metric</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.optimizer"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.optimizer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.seed"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.seed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ArtificialNeuralNetwork.shape"><code class="docutils literal notranslate"><span class="pre">ArtificialNeuralNetwork.shape</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.ConstantKernel"><code class="docutils literal notranslate"><span class="pre">ConstantKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ConstantKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">ConstantKernel.get_covariance_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.ConstantMean"><code class="docutils literal notranslate"><span class="pre">ConstantMean</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.ConstantMean.get_mean_function"><code class="docutils literal notranslate"><span class="pre">ConstantMean.get_mean_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Dense"><code class="docutils literal notranslate"><span class="pre">Dense</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Dense.nodes"><code class="docutils literal notranslate"><span class="pre">Dense.nodes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.DotProductKernel"><code class="docutils literal notranslate"><span class="pre">DotProductKernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Dropout"><code class="docutils literal notranslate"><span class="pre">Dropout</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Dropout.set_initializer"><code class="docutils literal notranslate"><span class="pre">Dropout.set_initializer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Dropout.rate"><code class="docutils literal notranslate"><span class="pre">Dropout.rate</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.ExponentialKernel"><code class="docutils literal notranslate"><span class="pre">ExponentialKernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.GP"><code class="docutils literal notranslate"><span class="pre">GP</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess"><code class="docutils literal notranslate"><span class="pre">GaussianProcess</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.fit_model"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.fit_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.get_hyperparameter_by_name"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.get_hyperparameter_by_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.initialize"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.initialize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.is_setup"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.is_setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.log_marginal_likelihood"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.log_marginal_likelihood()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.plot"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.plot_1d"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.plot_1d()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.plot_prediction_error"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.plot_prediction_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.predict"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.predict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.predict_quantiles"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.predict_quantiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.set_training_data"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.set_training_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.setup"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.update"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.update_hyperparameters"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.update_hyperparameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.X_train"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.X_train</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.hyperparameter_names"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.hyperparameter_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.hyperparameters"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.hyperparameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.GaussianProcess.y_train"><code class="docutils literal notranslate"><span class="pre">GaussianProcess.y_train</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel"><code class="docutils literal notranslate"><span class="pre">Kernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.constant"><code class="docutils literal notranslate"><span class="pre">Kernel.constant()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.exponential"><code class="docutils literal notranslate"><span class="pre">Kernel.exponential()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">Kernel.get_covariance_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.get_covariance_matrix"><code class="docutils literal notranslate"><span class="pre">Kernel.get_covariance_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.is_bounded"><code class="docutils literal notranslate"><span class="pre">Kernel.is_bounded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.linear"><code class="docutils literal notranslate"><span class="pre">Kernel.linear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.matern_32"><code class="docutils literal notranslate"><span class="pre">Kernel.matern_32()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.matern_52"><code class="docutils literal notranslate"><span class="pre">Kernel.matern_52()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.neural_network"><code class="docutils literal notranslate"><span class="pre">Kernel.neural_network()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.periodic"><code class="docutils literal notranslate"><span class="pre">Kernel.periodic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.piecewise_polynomial"><code class="docutils literal notranslate"><span class="pre">Kernel.piecewise_polynomial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.polynomial"><code class="docutils literal notranslate"><span class="pre">Kernel.polynomial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.rational_quadratic"><code class="docutils literal notranslate"><span class="pre">Kernel.rational_quadratic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.squared_exponential"><code class="docutils literal notranslate"><span class="pre">Kernel.squared_exponential()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.update"><code class="docutils literal notranslate"><span class="pre">Kernel.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.hyperparameter_names"><code class="docutils literal notranslate"><span class="pre">Kernel.hyperparameter_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Kernel.hyperparameters"><code class="docutils literal notranslate"><span class="pre">Kernel.hyperparameters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer"><code class="docutils literal notranslate"><span class="pre">Layer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.dense"><code class="docutils literal notranslate"><span class="pre">Layer.dense()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.dropout"><code class="docutils literal notranslate"><span class="pre">Layer.dropout()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.set_initializer"><code class="docutils literal notranslate"><span class="pre">Layer.set_initializer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.activation"><code class="docutils literal notranslate"><span class="pre">Layer.activation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.initializer"><code class="docutils literal notranslate"><span class="pre">Layer.initializer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.parent"><code class="docutils literal notranslate"><span class="pre">Layer.parent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Layer.type"><code class="docutils literal notranslate"><span class="pre">Layer.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.LinearKernel"><code class="docutils literal notranslate"><span class="pre">LinearKernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.LinearMean"><code class="docutils literal notranslate"><span class="pre">LinearMean</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Matern32Kernel"><code class="docutils literal notranslate"><span class="pre">Matern32Kernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Matern52Kernel"><code class="docutils literal notranslate"><span class="pre">Matern52Kernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.MaternKernel"><code class="docutils literal notranslate"><span class="pre">MaternKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.MaternKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">MaternKernel.get_covariance_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean"><code class="docutils literal notranslate"><span class="pre">Mean</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.constant"><code class="docutils literal notranslate"><span class="pre">Mean.constant()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.get_mean_function"><code class="docutils literal notranslate"><span class="pre">Mean.get_mean_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.is_bounded"><code class="docutils literal notranslate"><span class="pre">Mean.is_bounded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.linear"><code class="docutils literal notranslate"><span class="pre">Mean.linear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.one"><code class="docutils literal notranslate"><span class="pre">Mean.one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.polynomial"><code class="docutils literal notranslate"><span class="pre">Mean.polynomial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.update"><code class="docutils literal notranslate"><span class="pre">Mean.update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.zero"><code class="docutils literal notranslate"><span class="pre">Mean.zero()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.hyperparameter_names"><code class="docutils literal notranslate"><span class="pre">Mean.hyperparameter_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.Mean.hyperparameters"><code class="docutils literal notranslate"><span class="pre">Mean.hyperparameters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.NeuralNetworkKernel"><code class="docutils literal notranslate"><span class="pre">NeuralNetworkKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.NeuralNetworkKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">NeuralNetworkKernel.get_covariance_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.OneMean"><code class="docutils literal notranslate"><span class="pre">OneMean</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.PeriodicKernel"><code class="docutils literal notranslate"><span class="pre">PeriodicKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PeriodicKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">PeriodicKernel.get_covariance_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.PiecewisePolynomialKernel"><code class="docutils literal notranslate"><span class="pre">PiecewisePolynomialKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PiecewisePolynomialKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">PiecewisePolynomialKernel.get_covariance_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PiecewisePolynomialKernel.degree"><code class="docutils literal notranslate"><span class="pre">PiecewisePolynomialKernel.degree</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialKernel"><code class="docutils literal notranslate"><span class="pre">PolynomialKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">PolynomialKernel.get_covariance_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialKernel.degree"><code class="docutils literal notranslate"><span class="pre">PolynomialKernel.degree</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialMean"><code class="docutils literal notranslate"><span class="pre">PolynomialMean</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialMean.get_mean_function"><code class="docutils literal notranslate"><span class="pre">PolynomialMean.get_mean_function()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialMean.get_parameterized_coefficients"><code class="docutils literal notranslate"><span class="pre">PolynomialMean.get_parameterized_coefficients()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.PolynomialMean.degree"><code class="docutils literal notranslate"><span class="pre">PolynomialMean.degree</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.RationalQuadraticKernel"><code class="docutils literal notranslate"><span class="pre">RationalQuadraticKernel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/learning.html#hilo_mpc.RationalQuadraticKernel.get_covariance_function"><code class="docutils literal notranslate"><span class="pre">RationalQuadraticKernel.get_covariance_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.SquaredExponentialKernel"><code class="docutils literal notranslate"><span class="pre">SquaredExponentialKernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/learning.html#hilo_mpc.ZeroMean"><code class="docutils literal notranslate"><span class="pre">ZeroMean</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/modelling.html">Modelling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_algebraic_equations"><code class="docutils literal notranslate"><span class="pre">Model.add_algebraic_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_algebraic_states"><code class="docutils literal notranslate"><span class="pre">Model.add_algebraic_states()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_dynamical_equations"><code class="docutils literal notranslate"><span class="pre">Model.add_dynamical_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_dynamical_states"><code class="docutils literal notranslate"><span class="pre">Model.add_dynamical_states()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_equations"><code class="docutils literal notranslate"><span class="pre">Model.add_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_inputs"><code class="docutils literal notranslate"><span class="pre">Model.add_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_measurement_equations"><code class="docutils literal notranslate"><span class="pre">Model.add_measurement_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_measurements"><code class="docutils literal notranslate"><span class="pre">Model.add_measurements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_options"><code class="docutils literal notranslate"><span class="pre">Model.add_options()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.add_parameters"><code class="docutils literal notranslate"><span class="pre">Model.add_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.check_consistency"><code class="docutils literal notranslate"><span class="pre">Model.check_consistency()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.check_solver"><code class="docutils literal notranslate"><span class="pre">Model.check_solver()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.copy"><code class="docutils literal notranslate"><span class="pre">Model.copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.discretize"><code class="docutils literal notranslate"><span class="pre">Model.discretize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.is_linear"><code class="docutils literal notranslate"><span class="pre">Model.is_linear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.is_linearized"><code class="docutils literal notranslate"><span class="pre">Model.is_linearized()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.is_time_variant"><code class="docutils literal notranslate"><span class="pre">Model.is_time_variant()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.linearize"><code class="docutils literal notranslate"><span class="pre">Model.linearize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_algebraic_equations"><code class="docutils literal notranslate"><span class="pre">Model.remove_algebraic_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_algebraic_states"><code class="docutils literal notranslate"><span class="pre">Model.remove_algebraic_states()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_dynamical_equations"><code class="docutils literal notranslate"><span class="pre">Model.remove_dynamical_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_dynamical_states"><code class="docutils literal notranslate"><span class="pre">Model.remove_dynamical_states()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_equations"><code class="docutils literal notranslate"><span class="pre">Model.remove_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_inputs"><code class="docutils literal notranslate"><span class="pre">Model.remove_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_measurement_equations"><code class="docutils literal notranslate"><span class="pre">Model.remove_measurement_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_measurements"><code class="docutils literal notranslate"><span class="pre">Model.remove_measurements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_options"><code class="docutils literal notranslate"><span class="pre">Model.remove_options()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.remove_parameters"><code class="docutils literal notranslate"><span class="pre">Model.remove_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.reset"><code class="docutils literal notranslate"><span class="pre">Model.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.reset_solution"><code class="docutils literal notranslate"><span class="pre">Model.reset_solution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.scale"><code class="docutils literal notranslate"><span class="pre">Model.scale()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_algebraic_equations"><code class="docutils literal notranslate"><span class="pre">Model.set_algebraic_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_algebraic_states"><code class="docutils literal notranslate"><span class="pre">Model.set_algebraic_states()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_dynamical_equations"><code class="docutils literal notranslate"><span class="pre">Model.set_dynamical_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_dynamical_states"><code class="docutils literal notranslate"><span class="pre">Model.set_dynamical_states()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_equations"><code class="docutils literal notranslate"><span class="pre">Model.set_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_initial_conditions"><code class="docutils literal notranslate"><span class="pre">Model.set_initial_conditions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_initial_parameter_values"><code class="docutils literal notranslate"><span class="pre">Model.set_initial_parameter_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_inputs"><code class="docutils literal notranslate"><span class="pre">Model.set_inputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_measurement_equations"><code class="docutils literal notranslate"><span class="pre">Model.set_measurement_equations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_measurements"><code class="docutils literal notranslate"><span class="pre">Model.set_measurements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.set_parameters"><code class="docutils literal notranslate"><span class="pre">Model.set_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.setup"><code class="docutils literal notranslate"><span class="pre">Model.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.simulate"><code class="docutils literal notranslate"><span class="pre">Model.simulate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.substitute"><code class="docutils literal notranslate"><span class="pre">Model.substitute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.substitute_from"><code class="docutils literal notranslate"><span class="pre">Model.substitute_from()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.algebraic_equations"><code class="docutils literal notranslate"><span class="pre">Model.algebraic_equations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.algebraic_state_description"><code class="docutils literal notranslate"><span class="pre">Model.algebraic_state_description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.algebraic_state_names"><code class="docutils literal notranslate"><span class="pre">Model.algebraic_state_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.algebraic_state_units"><code class="docutils literal notranslate"><span class="pre">Model.algebraic_state_units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.algebraic_states"><code class="docutils literal notranslate"><span class="pre">Model.algebraic_states</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.continuous"><code class="docutils literal notranslate"><span class="pre">Model.continuous</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.discrete"><code class="docutils literal notranslate"><span class="pre">Model.discrete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.dynamical_equations"><code class="docutils literal notranslate"><span class="pre">Model.dynamical_equations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.dynamical_state_description"><code class="docutils literal notranslate"><span class="pre">Model.dynamical_state_description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.dynamical_state_names"><code class="docutils literal notranslate"><span class="pre">Model.dynamical_state_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.dynamical_state_units"><code class="docutils literal notranslate"><span class="pre">Model.dynamical_state_units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.dynamical_states"><code class="docutils literal notranslate"><span class="pre">Model.dynamical_states</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.feedthrough_matrix"><code class="docutils literal notranslate"><span class="pre">Model.feedthrough_matrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.initial_algebraic_states"><code class="docutils literal notranslate"><span class="pre">Model.initial_algebraic_states</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.initial_dynamical_states"><code class="docutils literal notranslate"><span class="pre">Model.initial_dynamical_states</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.initial_time"><code class="docutils literal notranslate"><span class="pre">Model.initial_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.input_description"><code class="docutils literal notranslate"><span class="pre">Model.input_description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.input_matrix"><code class="docutils literal notranslate"><span class="pre">Model.input_matrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.input_names"><code class="docutils literal notranslate"><span class="pre">Model.input_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.input_units"><code class="docutils literal notranslate"><span class="pre">Model.input_units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.inputs"><code class="docutils literal notranslate"><span class="pre">Model.inputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.measurement_description"><code class="docutils literal notranslate"><span class="pre">Model.measurement_description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.measurement_equations"><code class="docutils literal notranslate"><span class="pre">Model.measurement_equations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.measurement_names"><code class="docutils literal notranslate"><span class="pre">Model.measurement_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.measurement_units"><code class="docutils literal notranslate"><span class="pre">Model.measurement_units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.measurements"><code class="docutils literal notranslate"><span class="pre">Model.measurements</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.n_p"><code class="docutils literal notranslate"><span class="pre">Model.n_p</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.n_u"><code class="docutils literal notranslate"><span class="pre">Model.n_u</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.n_x"><code class="docutils literal notranslate"><span class="pre">Model.n_x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.n_y"><code class="docutils literal notranslate"><span class="pre">Model.n_y</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.n_z"><code class="docutils literal notranslate"><span class="pre">Model.n_z</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.options"><code class="docutils literal notranslate"><span class="pre">Model.options</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.output_matrix"><code class="docutils literal notranslate"><span class="pre">Model.output_matrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.parameter_description"><code class="docutils literal notranslate"><span class="pre">Model.parameter_description</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.parameter_names"><code class="docutils literal notranslate"><span class="pre">Model.parameter_names</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.parameter_units"><code class="docutils literal notranslate"><span class="pre">Model.parameter_units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.parameters"><code class="docutils literal notranslate"><span class="pre">Model.parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.sampling_time"><code class="docutils literal notranslate"><span class="pre">Model.sampling_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.solution"><code class="docutils literal notranslate"><span class="pre">Model.solution</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.solver"><code class="docutils literal notranslate"><span class="pre">Model.solver</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.state_matrix"><code class="docutils literal notranslate"><span class="pre">Model.state_matrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/modelling.html#hilo_mpc.Model.time"><code class="docutils literal notranslate"><span class="pre">Model.time</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/estimators.html">Observers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.add_measurements"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.add_measurements()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.estimate"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.estimate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.plot_mhe_estimation"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.plot_mhe_estimation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.return_mhe_estimation"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.return_mhe_estimation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_aux_nonlinear_constraints"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.set_aux_nonlinear_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_box_constraints"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.set_box_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_initial_guess"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.set_initial_guess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_nlp_options"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.set_nlp_options()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_scaling"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.set_scaling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_time_varying_parameters"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.set_time_varying_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.setup"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.MovingHorizonEstimator.has_state_noise"><code class="docutils literal notranslate"><span class="pre">MovingHorizonEstimator.has_state_noise</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.KalmanFilter"><code class="docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.KF"><code class="docutils literal notranslate"><span class="pre">KF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.ExtendedKalmanFilter"><code class="docutils literal notranslate"><span class="pre">ExtendedKalmanFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.EKF"><code class="docutils literal notranslate"><span class="pre">EKF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.UnscentedKalmanFilter"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.UnscentedKalmanFilter.alpha"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter.alpha</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.UnscentedKalmanFilter.beta"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter.beta</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.UnscentedKalmanFilter.kappa"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter.kappa</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.UKF"><code class="docutils literal notranslate"><span class="pre">UKF</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter"><code class="docutils literal notranslate"><span class="pre">ParticleFilter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.estimate"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.estimate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.setup"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.n_samples"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.n_samples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.pdf"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.pdf</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.probability_density_function"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.probability_density_function</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.sample_size"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.sample_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/estimators.html#hilo_mpc.ParticleFilter.variant"><code class="docutils literal notranslate"><span class="pre">ParticleFilter.variant</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/estimators.html#hilo_mpc.PF"><code class="docutils literal notranslate"><span class="pre">PF</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>

@@ -65,9 +65,6 @@
           
 
           
-            
-            <img src="../../../../_static/hilo_logo_short_2.png" class="logo" />
-          
           </a>
 
           
@@ -107,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/path_following_mpc.html">Path following vs Trajectory Tracking MPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/CSTR_Example.html">CSTR Reactor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../examples/learn_mpc.html">Learning an MPC controller with a NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/mhe_helicopter_example.html">CE 150 Helicopter</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
 <ul>
@@ -227,10 +225,10 @@
 
 
 <div class="viewcode-block" id="NMPC"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC">[docs]</a><span class="k">class</span> <span class="nc">NMPC</span><span class="p">(</span><span class="n">Controller</span><span class="p">,</span> <span class="n">DynamicOptimization</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for Nonlinear Model Predictive Control&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for Nonlinear Model Predictive Control&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_sx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="c1"># TODO: when discrete_u or discrete_x is given to the opts structure, but NMPC is used, raise an error saying</span>
         <span class="c1">#  that MINMPC should be used</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="n">plot_backend</span><span class="p">,</span> <span class="n">stats</span><span class="o">=</span><span class="n">stats</span><span class="p">,</span> <span class="n">use_sx</span><span class="o">=</span><span class="n">use_sx</span><span class="p">)</span>
@@ -292,7 +290,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_n_p</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">n_p</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;String representation method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation method&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_setup_done</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Howdy! You need to setup </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1"> before printing. &#39;</span>
                              <span class="sa">f</span><span class="s1">&#39;Run </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.setup().&#39;</span><span class="p">)</span>
@@ -385,14 +383,14 @@
         <span class="k">return</span> <span class="n">args</span>
 
     <span class="k">def</span> <span class="nf">_update_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="s1">&#39;NMPC&#39;</span>
 
     <span class="k">def</span> <span class="nf">_define_cost_terms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates the SX expressions for the stage or terminal cost</span>
 
 <span class="sd">        :return:</span>
@@ -433,7 +431,7 @@
                                                    <span class="bp">self</span><span class="o">.</span><span class="n">quad_terminal_cost</span><span class="o">.</span><span class="n">_trajectories_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;ref&#39;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_scale_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -450,7 +448,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_scaling</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_check_mpc_is_well_posed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -478,7 +476,7 @@
                 <span class="n">tvp_counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">_get_tvp_parameters_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tvp</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Given the current iteration, returns the value for every sampling time of all time-varying parameter</span>
 
 <span class="sd">        :return:</span>
@@ -520,7 +518,7 @@
                 <span class="n">tvp_counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">_parse_tvp_parameters_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tvp</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param tvp:</span>
 <span class="sd">        :return:</span>
@@ -551,7 +549,7 @@
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_parse_trajectory_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param param:</span>
 <span class="sd">        :param kwargs:</span>
@@ -589,7 +587,7 @@
                                     <span class="sa">f</span><span class="s2">&quot;The length of the varying reference must be one or longer than than the &quot;</span>
                                     <span class="sa">f</span><span class="s2">&quot;simulation time plus the prediction horizon. Please supply data points. The &quot;</span>
                                     <span class="sa">f</span><span class="s2">&quot;trajectory is long </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">traj_i</span><span class="p">)</span><span class="si">}</span><span class="s2"> but I am predicting at least up to the &quot;</span>
-                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prediction_horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2"> step.&quot;</span>
+                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">prediction_horizon</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> step.&quot;</span>
                                 <span class="p">)</span>
                             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_options</span><span class="p">[</span><span class="s1">&#39;objective_function&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;discrete&#39;</span><span class="p">:</span>
                                 <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
@@ -638,7 +636,7 @@
                                     <span class="sa">f</span><span class="s2">&quot;The length of the verying reference must be one or longer than than the &quot;</span>
                                     <span class="sa">f</span><span class="s2">&quot;simulation time plus the prediction horizon. Please supply datapoints. The &quot;</span>
                                     <span class="sa">f</span><span class="s2">&quot;trajectory is long </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">traj_i</span><span class="p">)</span><span class="si">}</span><span class="s2"> but I am predicting at least up to the &quot;</span>
-                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">prediction_horizon</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2"> step.&quot;</span>
+                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iterations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">prediction_horizon</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> step.&quot;</span>
                                 <span class="p">)</span>
                             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_options</span><span class="p">[</span><span class="s1">&#39;objective_function&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;discrete&#39;</span><span class="p">:</span>
                                 <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
@@ -659,7 +657,7 @@
                         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_nlp_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">tvp</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This arranges parameters, time-varying parameters and time-varying references in the parameters structure that</span>
 <span class="sd">        goes in the optimization.</span>
 
@@ -702,7 +700,7 @@
         <span class="k">return</span> <span class="n">param</span>
 
     <span class="k">def</span> <span class="nf">_save_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Saves references into the solution object. For plotting purposes</span>
 
 <span class="sd">        :return:</span>
@@ -740,7 +738,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;x_ref&#39;</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_save_predictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">tvp</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Store prediction in the solution object. Necessary for plotting.</span>
 
 <span class="sd">        :return:</span>
@@ -773,7 +771,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">x_lb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -781,7 +779,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">x_ub</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -789,7 +787,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">u_lb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -797,7 +795,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">u_ub</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -805,7 +803,7 @@
 
 <div class="viewcode-block" id="NMPC.set_box_constraints"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.set_box_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">set_box_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="n">z_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set box constraints to the model&#39;s variables. These look like</span>
 
 <span class="sd">        .. math::</span>
@@ -897,7 +895,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_box_constraints_is_set</span> <span class="o">=</span> <span class="kc">True</span></div>
 
     <span class="k">def</span> <span class="nf">_optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">runs</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param v0:</span>
 <span class="sd">        :param runs:</span>
@@ -929,7 +927,7 @@
         <span class="k">return</span> <span class="n">u_opt</span>
 
 <div class="viewcode-block" id="NMPC.optimize"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tvp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fix_x0</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Solves the MPC problem</span>
 
 <span class="sd">        :param x0: current system state</span>
@@ -961,7 +959,7 @@
 
             <span class="k">if</span> <span class="n">cp</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">cp</span><span class="o">.</span><span class="n">size1</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_tvp</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The model has </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_tvp</span><span class="si">}</span><span class="s2"> constant parameter(s): &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;The model has </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_n_tvp</span><span class="si">}</span><span class="s2"> constant parameter(s): &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameter_names</span><span class="si">}</span><span class="s2">. You must pass me the value of these before running the &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;optimization to the &#39;cp&#39; parameter.&quot;</span>
                 <span class="p">)</span>
@@ -1044,7 +1042,7 @@
         <span class="k">return</span> <span class="n">uopt</span></div>
 
 <div class="viewcode-block" id="NMPC.minimize_final_time"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.minimize_final_time">[docs]</a>    <span class="k">def</span> <span class="nf">minimize_final_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param weight:</span>
 <span class="sd">        :return:</span>
@@ -1054,7 +1052,7 @@
 
 <div class="viewcode-block" id="NMPC.plot_prediction"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.plot_prediction">[docs]</a>    <span class="k">def</span> <span class="nf">plot_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">save_plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name_file</span><span class="o">=</span><span class="s1">&#39;mpc_prediction.html&#39;</span><span class="p">,</span> <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="n">extras</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extras_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">format_figure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots the MPC predicted values.</span>
 
 <span class="sd">        :param save_plot: if True plot will be saved under &#39;plot_dir/name_file.html&#39; if they are declared, otherwise in</span>
@@ -1211,7 +1209,7 @@
 
 <div class="viewcode-block" id="NMPC.create_path_variable"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.create_path_variable">[docs]</a>    <span class="k">def</span> <span class="nf">create_path_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="n">u_pf_lb</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">u_pf_ub</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u_pf_ref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_pf_weight</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                              <span class="n">theta_guess</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta_lb</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta_ub</span><span class="o">=</span><span class="n">ca</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the path following variable. This must be used for building SX expression of the path.</span>
 
 <span class="sd">        :param name: name of the variable, default = &#39;theta&#39;</span>
@@ -1240,7 +1238,7 @@
         <span class="k">return</span> <span class="n">theta</span></div>
 
 <div class="viewcode-block" id="NMPC.get_time_variable"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.get_time_variable">[docs]</a>    <span class="k">def</span> <span class="nf">get_time_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Useful for trajectory tacking</span>
 
 <span class="sd">        :return:</span>
@@ -1250,7 +1248,7 @@
 
 <div class="viewcode-block" id="NMPC.set_quadratic_stage_cost"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.set_quadratic_stage_cost">[docs]</a>    <span class="k">def</span> <span class="nf">set_quadratic_stage_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cost_states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">states_references</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                  <span class="n">inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cost_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">inputs_references</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        More compact way to set the quadratic cost for the MPC. Mostly left for backwards compatibility.</span>
 <span class="sd">        To use only for set-point-tracking problems.</span>
 
@@ -1272,7 +1270,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">quad_stage_cost</span><span class="o">.</span><span class="n">add_inputs</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">cost_inputs</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">inputs_references</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NMPC.set_quadratic_terminal_cost"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.set_quadratic_terminal_cost">[docs]</a>    <span class="k">def</span> <span class="nf">set_quadratic_terminal_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        More compact way to set the quadratic cost for the MPC. Mostly left for backwards compatibility.</span>
 <span class="sd">        To use only for set-point-tracking problems.</span>
 
@@ -1289,7 +1287,7 @@
 <div class="viewcode-block" id="NMPC.set_terminal_constraints"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.set_terminal_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">set_terminal_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">terminal_constraint</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;terminal_constraint&#39;</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">is_soft</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="n">max_violation</span><span class="o">=</span><span class="n">ca</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
                                  <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allows to add a (nonlinear) terminal constraint.</span>
 
 <span class="sd">        :param terminal_constraint:  It has to contain variables of the model</span>
@@ -1319,7 +1317,7 @@
 
     <span class="k">def</span> <span class="nf">_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver_options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets up the corresponding optimization problem (OP) of the MPC. This must be run before attempting to solve</span>
 <span class="sd">        the MPC.</span>
 
@@ -1974,7 +1972,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_solver</span> <span class="o">=</span> <span class="n">solver</span>
 
 <div class="viewcode-block" id="NMPC.setup"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver_options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Sets up the corresponding optimization problem (OP) of the MPC. This must be run before attempting to solve</span>
 <span class="sd">           the MPC.</span>
 
@@ -1983,12 +1981,15 @@
 <span class="sd">           :param solver_options: Dictionary with options for the optimizer. These options are solver specific. Refer to</span>
 <span class="sd">               the CasADi Documentation https://web.casadi.org/python-api/#nlp</span>
 <span class="sd">           :type solver_options: dict</span>
+<span class="sd">           </span>
 <span class="sd">           :return: None</span>
 <span class="sd">       &quot;&quot;&quot;</span>
+        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_setup</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">solver_options</span><span class="o">=</span><span class="n">solver_options</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NMPC.return_prediction"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.return_prediction">[docs]</a>    <span class="k">def</span> <span class="nf">return_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the mpc prediction.</span>
 
 <span class="sd">        :return: x_pred, u_pred, t_pred</span>
@@ -2014,7 +2015,7 @@
             <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="NMPC.get_reference"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.NMPC.get_reference">[docs]</a>    <span class="k">def</span> <span class="nf">get_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns reference values at a given time. If works for path following, trajectory tracking and reference</span>
 <span class="sd">        tracking problems. For the reference tracking problem it returns always a (constant) reference.</span>
 
@@ -2050,7 +2051,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">obj_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return: Objective function (MX)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2062,7 +2063,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">prediction_horizon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2078,7 +2079,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">control_horizon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2094,7 +2095,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_of_path_vars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Number of path variables used for path following</span>
 
 <span class="sd">        :return:</span>
@@ -2103,7 +2104,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_tvp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2111,7 +2112,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">time_var</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2119,13 +2120,13 @@
 
 
 <div class="viewcode-block" id="LMPC"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.LMPC">[docs]</a><span class="k">class</span> <span class="nc">LMPC</span><span class="p">(</span><span class="n">Controller</span><span class="p">,</span> <span class="n">DynamicOptimization</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="s1">&#39;bokeh&#39;</span><span class="p">,</span> <span class="n">use_sx</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
         <span class="c1"># Copy the steady state values. Because they will get lost afer the constructor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_steady_state</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">_steady_state</span>
-        <span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor method&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="n">plot_backend</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">is_linear</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The model must be linear. Use the NMPC class instead.&quot;</span><span class="p">)</span>
@@ -2191,14 +2192,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_solver_name</span> <span class="o">=</span> <span class="s1">&#39;qpoases&#39;</span>
 
     <span class="k">def</span> <span class="nf">_update_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="s1">&#39;LMPC&#39;</span>
 
     <span class="k">def</span> <span class="nf">_parse_tvp_parameters_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tvp</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param tvp:</span>
 <span class="sd">        :return:</span>
@@ -2228,7 +2229,7 @@
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_save_predictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">tvp</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Store prediction in the solution object. Necessary for plotting.</span>
 
 <span class="sd">        :return:</span>
@@ -2251,7 +2252,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">DM</span><span class="p">(</span><span class="n">t_pred</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_scale_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2276,7 +2277,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_u_scaling</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_u_scaling</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
 
     <span class="k">def</span> <span class="nf">_check_mpc_is_well_posed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2290,17 +2291,17 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Q</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The state matrix Q must be of dimension </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">)</span><span class="si">}</span><span class="s2">, you have dimension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_Q</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s2">&quot;The state matrix Q must be of dimension </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">)</span><span class="si">}</span><span class="s2">, you have dimension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_Q</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The state matrix P must be of dimension </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">)</span><span class="si">}</span><span class="s2">, you have dimension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s2">&quot;The state matrix P must be of dimension </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_n_x</span><span class="p">)</span><span class="si">}</span><span class="s2">, you have dimension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_P</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_R</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_R</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_u</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The input matrix Q must be of dimension </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_u</span><span class="p">)</span><span class="si">}</span><span class="s2">, you have dimension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_R</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="sa">f</span><span class="s2">&quot;The input matrix Q must be of dimension </span><span class="si">{</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_u</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_n_u</span><span class="p">)</span><span class="si">}</span><span class="s2">, you have dimension </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_R</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># # Check tvp and initialize horizon of tvp values</span>
         <span class="c1"># if self._time_varying_parameters_values is not None:</span>
@@ -2328,7 +2329,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;x_ref&#39;</span><span class="p">,</span> <span class="n">x_ref</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LMPC.setup"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.LMPC.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solver_options</span><span class="o">=</span><span class="p">{},</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;qpoases&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param options:</span>
 <span class="sd">        :param solver_options:</span>
@@ -2492,7 +2493,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_param_lmpc</span> <span class="o">=</span> <span class="n">param_lmpc</span></div>
 
 <div class="viewcode-block" id="LMPC.optimize"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.LMPC.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tvp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param x0:</span>
 <span class="sd">        :param tvp:</span>
@@ -2509,7 +2510,7 @@
 
             <span class="k">if</span> <span class="n">cp</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">cp</span><span class="o">.</span><span class="n">size1</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_tvp</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The model has </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_p</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_tvp</span><span class="si">}</span><span class="s2"> constant parameter(s): &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;The model has </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">n_p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_n_tvp</span><span class="si">}</span><span class="s2"> constant parameter(s): &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameter_names</span><span class="si">}</span><span class="s2">. You must pass me the value of these before running the &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;optimization to the &#39;cp&#39; parameter.&quot;</span>
                 <span class="p">)</span>
@@ -2593,7 +2594,7 @@
             <span class="sa">f</span><span class="s2">&quot;The method </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">set_initial_guess</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is not available for LMPC.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LMPC.return_prediction"><a class="viewcode-back" href="../../../../api/controllers.html#hilo_mpc.LMPC.return_prediction">[docs]</a>    <span class="k">def</span> <span class="nf">return_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the mpc prediction.</span>
 
 <span class="sd">        :return: x_pred, u_pred, t_pred</span>
@@ -2615,7 +2616,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">prediction_horizon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2647,7 +2648,7 @@
 
 
 <span class="k">class</span> <span class="nc">SMPC</span><span class="p">(</span><span class="n">NMPC</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for Stochastic Nonlinear Model Predictive Control&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for Stochastic Nonlinear Model Predictive Control&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_model</span><span class="p">,</span> <span class="n">stoch_model</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_sx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">stats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Kgain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -2697,7 +2698,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_smpc_options_is_set</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_create_deterministic_surrogate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">det_model</span><span class="p">,</span> <span class="n">gps</span><span class="p">,</span> <span class="n">Bw</span><span class="p">,</span> <span class="n">Kgain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create surrogate deterministic model</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">model_c</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">plot_backend</span><span class="o">=</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2801,7 +2802,7 @@
         <span class="k">return</span> <span class="n">model_c</span><span class="p">,</span> <span class="n">Kx</span><span class="p">,</span> <span class="n">Kgain</span>
 
     <span class="k">def</span> <span class="nf">_update_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2854,7 +2855,7 @@
     <span class="k">def</span> <span class="nf">set_box_chance_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">z_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># TODO: add method&#39;s documentation</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set box constraints for the SMPC.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># The equivalent deterministic case has n_x_s + n_x_s**2 number of states. So we need to expand the bounds provided</span>
@@ -3040,10 +3041,8 @@
         };
     </script>
       <script type="text/javascript" src="../../../../_static/documentation_options.js"></script>
-      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
       <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../../../_static/sphinx_highlight.js"></script>
       <script type="text/javascript" src="../../../../_static/clipboard.min.js"></script>
       <script type="text/javascript" src="../../../../_static/copybutton.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>

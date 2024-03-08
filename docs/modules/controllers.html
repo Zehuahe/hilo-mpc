@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -499,7 +499,7 @@ For now, we use the QuadraticCost, since it covers 99.9% of the problems you mig
 </div>
 <p>Defining a path-following problem can be done in  three steps:</p>
 <ol class="arabic simple">
-<li><p>Run <code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code> to generate the path variable</p></li>
+<li><p>Run <a class="reference internal" href="../api/controllers.html#hilo_mpc.NMPC.create_path_variable" title="hilo_mpc.NMPC.create_path_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code></a> to generate the path variable</p></li>
 <li><p>Define the path function using the path variable</p></li>
 <li><p>Pass the path function function to the <cite>ref</cite> argument of stage and terminal cost and put <cite>path_following=True</cite></p></li>
 </ol>
@@ -507,7 +507,7 @@ For now, we use the QuadraticCost, since it covers 99.9% of the problems you mig
 <p class="admonition-title">Note</p>
 <p>You can create only as many path variables and you can have as many different path functions as you want.</p>
 </div>
-<p>You can pass to the <code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code>:</p>
+<p>You can pass to the <a class="reference internal" href="../api/controllers.html#hilo_mpc.NMPC.create_path_variable" title="hilo_mpc.NMPC.create_path_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code></a>:</p>
 <ul class="simple">
 <li><p>The name of the variable.</p></li>
 <li><p>The lower and upper bound on the virtual input.</p></li>
@@ -539,7 +539,7 @@ quadratic stage cost</p>
 <p class="admonition-title">Note</p>
 <p>You can define the path function with any other variable that appears in the model!</p>
 </div>
-<p>You can also have multiple path variables. To do that just simply call the <code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code>
+<p>You can also have multiple path variables. To do that just simply call the <a class="reference internal" href="../api/controllers.html#hilo_mpc.NMPC.create_path_variable" title="hilo_mpc.NMPC.create_path_variable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hilo_mpc.NMPC.create_path_variable()</span></code></a>
 as many times you want. For example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nmpc</span> <span class="o">=</span> <span class="n">NMPC</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
@@ -620,7 +620,7 @@ problem reads</p>
         &amp;&amp;&amp;\text{Pr} \left(u_k \in \mathcal{U}\right) \geq p^u.
 \end{align}\end{split}\]</div>
 <p>The previous problem is infinite dimensional hence in general intractable. Following the similar steps as in
-<span id="id2">[<a class="reference internal" href="#id5" title="Lukas Hewing and Melanie N. Zeilinger. Cautious model predictive control using gaussian process regression. CoRR, 2017. URL: http://arxiv.org/abs/1705.10702, arXiv:1705.10702.">Hewing and Zeilinger, 2017</a>]</span>, the problem is reformulated as follows</p>
+<span id="id2">[<a class="reference internal" href="#id5"><span>HZ17</span></a>]</span>, the problem is reformulated as follows</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
     &amp;\!\max_{\mu^u}&amp;\,\ &amp; \mathbb{E} \left( \sum_{k=0}^{N-1} l(x_k,u_k) + e(x_N)\right) \\
@@ -670,13 +670,12 @@ See <a class="reference external" href="https://web.casadi.org/python-api/#qp">t
 <p class="admonition-title">Note</p>
 <p>The options can vary depending on the solver used.</p>
 </div>
-<div class="docutils container" id="id4">
-<div class="citation" id="id5" role="doc-biblioentry">
+<p id="id4"><div class="citation" id="id5" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">HZ17</a><span class="fn-bracket">]</span></span>
 <p>Lukas Hewing and Melanie N. Zeilinger. Cautious model predictive control using gaussian process regression. <em>CoRR</em>, 2017. URL: <a class="reference external" href="http://arxiv.org/abs/1705.10702">http://arxiv.org/abs/1705.10702</a>, <a class="reference external" href="https://arxiv.org/abs/1705.10702">arXiv:1705.10702</a>.</p>
 </div>
 </div>
-</div>
+</p>
 </section>
 </section>
 </section>

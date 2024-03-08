@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -204,7 +204,7 @@
 <p>The goal of this example is learning a MPC controller using a artificial neural network.</p>
 <section id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this heading">¶</a></h2>
-<p>Learning a MPC from simulations and use the learned model for real applications could have several advantages <a class="footnote-reference brackets" href="#footcite-karg2020" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. For example for embedded applications often we need to compute the control action in a very short time, with low computational power and low energy (e.g. embedded applications using batteries). For this for this it is useful to learn the controller offline, that basically approximates the solution of the optimization problem given the measured states. The learned
+<p>Learning a MPC from simulations and use the learned model for real applications could have several advantages <a class="footnote-reference brackets" href="#karg2020" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. For example for embedded applications often we need to compute the control action in a very short time, with low computational power and low energy (e.g. embedded applications using batteries). For this for this it is useful to learn the controller offline, that basically approximates the solution of the optimization problem given the measured states. The learned
 controller can be quickly and efficiently evaluated online in the embedded system, without solving an optimization problem.</p>
 <p>The system that is considered in this example is a linear mass-spring-damper system, whose dynamics are given by</p>
 <p><img alt="drawing" class="no-scaled-link" src="../_images/mass_spring_damper.png" style="width: 800px;" /></p>

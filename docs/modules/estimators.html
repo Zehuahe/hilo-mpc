@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -115,7 +115,7 @@
 <li class="toctree-l1"><a class="reference internal" href="modellings.html">Modelling module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Observer module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#moving-horizon-estimator">Moving Horizon Estimator</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#horizon">Horizon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#horizon-length">Horizon length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#objective-function">Objective function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#constraints">Constraints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#non-uniform-sampling-intervals">Non-uniform sampling intervals</a></li>
@@ -201,7 +201,7 @@
   <section id="observer-module">
 <span id="id1"></span><h1>Observer module<a class="headerlink" href="#observer-module" title="Permalink to this heading">¶</a></h1>
 <p>The HILO-MPC Observer module contains several state (and parameter) observers.
-observers are used to infer states and parameters from measurements. For a more detailed
+Observers are used to infer states and parameters from measurements. For a more detailed
 description of the methods refer to <a class="reference internal" href="../api/estimators.html#observer-autodoc"><span class="std std-ref">the API</span></a>.</p>
 <p>The Observer module contains the following classes:</p>
 <ul class="simple">
@@ -221,8 +221,8 @@ state of the system. In the toolbox, the class MHE can set a Moving Horizon Esti
 <li><p>An objective function.</p></li>
 <li><p>constraints (optional)</p></li>
 </ol>
-<section id="horizon">
-<h3>Horizon<a class="headerlink" href="#horizon" title="Permalink to this heading">¶</a></h3>
+<section id="horizon-length">
+<h3>Horizon length<a class="headerlink" href="#horizon-length" title="Permalink to this heading">¶</a></h3>
 <p>To achieve an effective state estimate, the ideal approach involves considering all past measurements from the initial
 time up to the present, leading to what is referred to as a full information estimator. Unfortunately, the computational
 complexity becomes prohibitive as the number of measurements increases. Given this challenge, moving horizon estimation
@@ -240,11 +240,13 @@ to set this parameter.</p>
 </section>
 <section id="objective-function">
 <h3>Objective function<a class="headerlink" href="#objective-function" title="Permalink to this heading">¶</a></h3>
-<p>We assume that the current instant is T and the horizon is N. The objective of MHE is to find an initial state <span class="math notranslate nohighlight">\(x_{T - N}\)</span> and the disturbance
+<p>We assume that the current instant is <span class="math notranslate nohighlight">\(T\)</span> and the horizon is <span class="math notranslate nohighlight">\(N\)</span>. The objective of MHE is to find an initial state <span class="math notranslate nohighlight">\(x_{T - N}\)</span> and the disturbance
 sequence <span class="math notranslate nohighlight">\(\mathbf{w} = [w_{T - N}, w_{T - N + 1}, \dots, w_{T-1}]^T\)</span> so that the objective function is minimized which can be formulated as follows:</p>
 <div class="math notranslate nohighlight">
+\[\begin{split}&amp;\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}}\quad\Phi_T\\\end{split}\]</div>
+<p>The objective function is constructed as follows:</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
-&amp;\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}} \quad\Phi_T\\
 \hspace{3em}\Phi_T &amp;= Z_{T-N}\left( x_{T-N} \right) + \sum_{k = T - N}^{T - 1} L\left( v_k,w_k\right) \\
       &amp;= \left\| {x_{T-N} - \bar{x}_{T-N}} \right\|_{\Pi^{-1}}^{2} + \sum_{k = T - N}^{T - 1}\left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2} \\
       &amp;\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
@@ -277,11 +279,11 @@ the covariance matrix of the initial guess is <span class="math notranslate nohi
 </section>
 <section id="constraints">
 <h3>Constraints<a class="headerlink" href="#constraints" title="Permalink to this heading">¶</a></h3>
-<p>The class provides a method:code:<cite>set_box_constraints</cite> to set the constraints:</p>
-<p>The parameter:code:<cite>x_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">x_lb</span></code> is the upper/lower bound of the dynamical state.</p>
-<p>The parameter:code:<cite>w_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">w_lb</span></code> is the upper/lower bound of the input.</p>
-<p>The parameter:code:<cite>p_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">p_lb</span></code> is the upper/lower bound of the parameter.</p>
-<p>The parameter:code:<cite>z_ub</cite> /<code class="code docutils literal notranslate"><span class="pre">z_lb</span></code> is the upper/lower bound of the algebraic state.</p>
+<p>The class provides a method <code class="code docutils literal notranslate"><span class="pre">set_box_constraints</span></code> to set the constraints:</p>
+<p>The parameter <code class="code docutils literal notranslate"><span class="pre">x_ub</span></code> /<code class="code docutils literal notranslate"><span class="pre">x_lb</span></code> is the upper/lower bound of the dynamical state.</p>
+<p>The parameter <code class="code docutils literal notranslate"><span class="pre">w_ub</span></code> /<code class="code docutils literal notranslate"><span class="pre">w_lb</span></code> is the upper/lower bound of the input.</p>
+<p>The parameter <code class="code docutils literal notranslate"><span class="pre">p_ub</span></code> /<code class="code docutils literal notranslate"><span class="pre">p_lb</span></code> is the upper/lower bound of the parameter.</p>
+<p>The parameter <code class="code docutils literal notranslate"><span class="pre">z_ub</span></code> /<code class="code docutils literal notranslate"><span class="pre">z_lb</span></code> is the upper/lower bound of the algebraic state.</p>
 <p>For example, if we want to set the constraint that all the add_states(3 dynamical states) must be positive, the code could be :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mhe</span> <span class="o">=</span> <span class="n">MHE</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 
@@ -298,7 +300,7 @@ the covariance matrix of the initial guess is <span class="math notranslate nohi
 </section>
 <section id="kalman-filter">
 <h2>Kalman Filter<a class="headerlink" href="#kalman-filter" title="Permalink to this heading">¶</a></h2>
-<p>The class <code class="xref py py-class docutils literal notranslate"><span class="pre">KalmanFilter</span></code> (alias <code class="xref py py-class docutils literal notranslate"><span class="pre">KF</span></code>) implements the Kalman filter developed by Rudolf E. Kálmán. To set up the Kalman filter you need an already set up <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> instance. Additionally you might want to supply a plot backend (via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_backend</span></code> keyword argument) in order to visualize the estimation results later on. At the moment only <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and <a class="reference external" href="https://bokeh.org/">Bokeh</a> are supported for plotting. The Kalman filter can be initialized as follows:</p>
+<p>The class <a class="reference internal" href="../api/estimators.html#hilo_mpc.KalmanFilter" title="hilo_mpc.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a> (alias <a class="reference internal" href="../api/estimators.html#hilo_mpc.KF" title="hilo_mpc.KF"><code class="xref py py-class docutils literal notranslate"><span class="pre">KF</span></code></a>) implements the Kalman filter developed by Rudolf E. Kálmán. To set up the Kalman filter you need an already set up <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> instance. Additionally you might want to supply a plot backend (via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_backend</span></code> keyword argument) in order to visualize the estimation results later on. At the moment only <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and <a class="reference external" href="https://bokeh.org/">Bokeh</a> are supported for plotting. The Kalman filter can be initialized as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hilo_mpc</span> <span class="kn">import</span> <span class="n">KF</span>
 
 
@@ -306,7 +308,7 @@ the covariance matrix of the initial guess is <span class="math notranslate nohi
 <span class="n">kf</span> <span class="o">=</span> <span class="n">KF</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">plot_backend</span><span class="o">=</span><span class="s1">&#39;bokeh&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Required information, like e.g. the model dynamics or the sampling time, will be automatically extracted from the <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> instance.</p>
+<p>Required information, like e.g. the model dynamics or the sampling time, will be automatically extracted from the <a class="reference internal" href="../api/modelling.html#hilo_mpc.Model" title="hilo_mpc.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a> instance.</p>
 </section>
 <section id="extended-kalman-filter">
 <h2>Extended Kalman Filter<a class="headerlink" href="#extended-kalman-filter" title="Permalink to this heading">¶</a></h2>
