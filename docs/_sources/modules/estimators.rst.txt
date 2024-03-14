@@ -53,7 +53,12 @@ We assume that the current instant is :math:`T` and the horizon is :math:`N`. Th
 sequence :math:`\mathbf{w} = [w_{T - N}, w_{T - N + 1}, \dots, w_{T-1}]^T` so that the objective function is minimized which can be formulated as follows:
 
 .. math::
+   \begin{aligned}
    &\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}}\quad\Phi_T\\
+   &\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
+       & \hspace{4em} y_k = h_k\left( x_k, u_k \right) + v_k \\
+       & \hspace{3em} x_k \in \mathcal{X}_k, \;w_k \in \mathcal{W}_k, \;v_k \in \mathcal{V}_k
+    \end{aligned}
 
 The objective function is constructed as follows:
 
@@ -61,9 +66,6 @@ The objective function is constructed as follows:
  \begin{aligned}
  \hspace{3em}\Phi_T &= Z_{T-N}\left( x_{T-N} \right) + \sum_{k = T - N}^{T - 1} L\left( v_k,w_k\right) \\
        &= \left\| {x_{T-N} - \bar{x}_{T-N}} \right\|_{\Pi^{-1}}^{2} + \sum_{k = T - N}^{T - 1}\left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2} \\
-       &\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
-       & \hspace{4em} y_k = h_k\left( x_k, u_k \right) + v_k \\
-       & \hspace{3em} x_k \in \mathcal{X}_k, \;w_k \in \mathcal{W}_k, \;v_k \in \mathcal{V}_k
  \end{aligned}
 
 

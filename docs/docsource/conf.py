@@ -19,7 +19,6 @@ import sphinx_theme
 sys.path.insert(0, os.path.abspath('../..'))
 
 
-
 # -- Project information -----------------------------------------------------
 
 project = 'HILO-MPC'
@@ -41,7 +40,7 @@ extensions = [
     # 'sphinx_autodoc_typehints',
     'sphinx.ext.viewcode',
     'sphinx_copybutton',
-    'sphinxcontrib.packages',
+    #'sphinxcontrib.packages',
     'sphinx.ext.mathjax',
 
 ]

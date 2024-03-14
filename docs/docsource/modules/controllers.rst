@@ -170,6 +170,7 @@ if you have a continuous system but you want to use a discrete objective functio
 
 
 .. _tvp_nmpc:
+
 Time-varying parameters
 -----------------------
 Time-varying parameters are model parameters which are not constant in time. For example they could model the effect
@@ -221,7 +222,7 @@ in the control loop.
 Trajectory tracking problem
 -----------------------------
 The trajectory tracking problem can be formulated easily.
-Refer to :ref:`theoretical background<background_trajectory_tracking>` for the theoretical background and to the following
+Refer to :ref:`theoretical background <background_trajectory_tracking>` for the theoretical background and to the following
 examples:
 
 1. `point mass`_

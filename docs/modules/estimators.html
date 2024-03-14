@@ -243,15 +243,17 @@ to set this parameter.</p>
 <p>We assume that the current instant is <span class="math notranslate nohighlight">\(T\)</span> and the horizon is <span class="math notranslate nohighlight">\(N\)</span>. The objective of MHE is to find an initial state <span class="math notranslate nohighlight">\(x_{T - N}\)</span> and the disturbance
 sequence <span class="math notranslate nohighlight">\(\mathbf{w} = [w_{T - N}, w_{T - N + 1}, \dots, w_{T-1}]^T\)</span> so that the objective function is minimized which can be formulated as follows:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}&amp;\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}}\quad\Phi_T\\\end{split}\]</div>
+\[\begin{split}\begin{aligned}
+&amp;\hspace{5em}\min_{x_{\scriptstyle T-N},\mathbf{w}}\quad\Phi_T\\
+&amp;\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
+    &amp; \hspace{4em} y_k = h_k\left( x_k, u_k \right) + v_k \\
+    &amp; \hspace{3em} x_k \in \mathcal{X}_k, \;w_k \in \mathcal{W}_k, \;v_k \in \mathcal{V}_k
+ \end{aligned}\end{split}\]</div>
 <p>The objective function is constructed as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \hspace{3em}\Phi_T &amp;= Z_{T-N}\left( x_{T-N} \right) + \sum_{k = T - N}^{T - 1} L\left( v_k,w_k\right) \\
       &amp;= \left\| {x_{T-N} - \bar{x}_{T-N}} \right\|_{\Pi^{-1}}^{2} + \sum_{k = T - N}^{T - 1}\left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2} \\
-      &amp;\mathrm{s.t.} \qquad x_{k + 1} = f\left( x_k, u_k \right) + w_k \\
-      &amp; \hspace{4em} y_k = h_k\left( x_k, u_k \right) + v_k \\
-      &amp; \hspace{3em} x_k \in \mathcal{X}_k, \;w_k \in \mathcal{W}_k, \;v_k \in \mathcal{V}_k
 \end{aligned}\end{split}\]</div>
 <p>The objective function <span class="math notranslate nohighlight">\(\Phi_T\)</span> contains two parts, the stage cost function <span class="math notranslate nohighlight">\(L\left ( v_k,w_k\right )\)</span> and the arrival cost <span class="math notranslate nohighlight">\(Z_{T-N}\left ( x_{T-N} \right )\)</span>.
 The stage cost function <span class="math notranslate nohighlight">\(L\left ( v_k,w_k\right ) = \left\|v_{k} \right\|_{R^{-1}}^{2}+\left\|w_{k} \right\|_{Q^{-1}}^{2}\)</span> is commonly quadratic and

@@ -367,9 +367,12 @@
 <span class="sd">        hzh - checks if the dimensions of the passed input and output measurements are consistent with </span>
 <span class="sd">        the input and out dimensions set in the model</span>
 
-<span class="sd">        :param y: measurement</span>
+<span class="sd">        :param y: output</span>
+<span class="sd">        :type y: list, numpy array or CasADi DM array</span>
 <span class="sd">        :param u: input</span>
-<span class="sd">        :return:</span>
+<span class="sd">        :type u: list, numpy array or CasADi DM array</span>
+<span class="sd">        :return: y(list), u(list)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">check_and_wrap_to_list</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
@@ -387,7 +390,7 @@
 
     <span class="k">def</span> <span class="nf">_check_mhe_is_well_posed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        hzh - checks some important things of mhe. (cost function, horizon length and the consistency between the dimensions of the state boundary and the model state dimensions)</span>
+<span class="sd">        checks some important things of mhe. (cost function, horizon length and the consistency between the dimensions of the state boundary and the model state dimensions)</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -412,7 +415,7 @@
 
     <span class="k">def</span> <span class="nf">_scale_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        hzh - scale the state, input and parameter of the boundary and model </span>
+<span class="sd">        scale the state, input and parameter of the boundary and model </span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_x_ub</span> <span class="o">=</span> <span class="n">scale_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_x_ub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_scaling</span><span class="p">)</span>
@@ -464,8 +467,10 @@
 <span class="sd">        This adds measurements that will appended to the measurements history.</span>
 <span class="sd">        At the moment it is assumed that measurements are available ata  constant time interval.</span>
 
-<span class="sd">        :param y_meas:</span>
-<span class="sd">        :param u_meas:</span>
+<span class="sd">        :param y_meas: output measurement</span>
+<span class="sd">        :type y_meas: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param u_meas: input measurement</span>
+<span class="sd">        :type u_meas: list, numpy array or CasADi DM array</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_setup_done</span><span class="p">:</span>
@@ -498,17 +503,26 @@
 
 <div class="viewcode-block" id="MovingHorizonEstimator.estimate"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_arrival</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_arrival</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute MHE</span>
+<span class="sd">        Estimate the current states and parameters </span>
 
-<span class="sd">        :param x_arrival:</span>
-<span class="sd">        :param p_arrival:</span>
+<span class="sd">        :param x_arrival: arrival state</span>
+<span class="sd">        :type x_arrival: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param p_arrival: arrival parameter</span>
+<span class="sd">        :type p_arrival: list, numpy array or CasADi DM array</span>
 <span class="sd">        :param v0: initial guess of the optimal vector</span>
-<span class="sd">        :param runs: number of optimizations to run. If different than zero will run very optimization will perturb the</span>
-<span class="sd">            initial guess v0 randomly.</span>
-<span class="sd">            ACHTUNG: this could cause problems with the integrators or give something outside constraints.</span>
-<span class="sd">            The output will be the solution with the minimum objective function (default 0)</span>
+<span class="sd">        :type v0: list or casadi DM</span>
+<span class="sd">        :param runs: number of optimizations to run. If different than zero will run very optimization will perturb the initial guess v0 randomly.</span>
+<span class="sd">            </span>
+<span class="sd">         Note: this could cause problems with the integrators or give something outside constraints.</span>
+<span class="sd">         The output will be the solution with the minimum objective function (default 0)</span>
+<span class="sd">        :type runs: int</span>
 <span class="sd">        :param kwargs:</span>
-<span class="sd">        :return: u_opt: first piece of optimal control sequence</span>
+<span class="sd">        :return: x_opt: optimal(estimated) state, p_opt: optimal(estimated) parameter                                               ？？？？？？？？？？？？？？？？？？</span>
+
+<span class="sd">                 x_opt, None: if there are no parameters set in the model</span>
+
+<span class="sd">                 None, None: when the horizon is not reached, in other words, the mhe hasn&#39;t obtained a sufficient number of measurements yet </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO Check the shape of p0, x0</span>
         <span class="c1"># TODO to test</span>
@@ -608,8 +622,10 @@
 <span class="sd">        hzh - Sets up the optimization problem of mhe</span>
 
 <span class="sd">        :param options: set the options that modify how optimization problem is set</span>
+<span class="sd">        :type options: dict</span>
 <span class="sd">        :param nlp_opts:</span>
 <span class="sd">        :param solver: set the solver of nlp problem</span>
+<span class="sd">        :type solver: dict</span>
 <span class="sd">        </span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1062,9 +1078,13 @@
 <span class="sd">        states and inputs.</span>
 
 <span class="sd">        :param x_scaling: list of scaling factors</span>
+<span class="sd">        :type x_scaling: list or nd.arrays</span>
 <span class="sd">        :param w_scaling: list of scaling factors</span>
+<span class="sd">        :type w_scaling: list or nd.arrays</span>
 <span class="sd">        :param p_scaling: list of scaling factors</span>
+<span class="sd">        :type p_scaling: list or nd.arrays</span>
 <span class="sd">        :param u_scaling: list of scaling factors</span>
+<span class="sd">        :type u_scaling: list or nd.arrays</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x_scaling</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1106,7 +1126,8 @@
 <span class="sd">        Sets the time-varying parameters for the estimator.</span>
 <span class="sd">        The estimator will expect these as an input at every iteration</span>
 
-<span class="sd">        :param time_varying_parameters: list of strings with time varying parameter names</span>
+<span class="sd">        :param time_varying_parameters: time varying parameter names</span>
+<span class="sd">        :type time_varying_parameters: list of strings </span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># TODO check if it is the same as the parent class, if yes delete</span>
@@ -1127,16 +1148,24 @@
 <div class="viewcode-block" id="MovingHorizonEstimator.set_box_constraints"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_box_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">set_box_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="n">z_lb</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        hzh - Sets box constraints of the model&#39;s variables</span>
+<span class="sd">        Sets box constraints of the model&#39;s variables</span>
 
 <span class="sd">        :param x_ub: upper bound on states.</span>
-<span class="sd">        :param x_lb: lower bound on  states</span>
-<span class="sd">        :param u_ub: upper bound on inputs</span>
-<span class="sd">        :param u_lb: lower bound on inputs</span>
-<span class="sd">        :param y_ub: upper bound on measurements</span>
-<span class="sd">        :param y_lb: lower bound on measurements</span>
+<span class="sd">        :type x_ub: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param x_lb: lower bound on states</span>
+<span class="sd">        :type x_ub: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param w_ub: upper bound on inputs                                                                             ？？？？？？？？？？</span>
+<span class="sd">        :type w_ub: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param w_lb: lower bound on inputs                                                                             ？？？？？？？？？？</span>
+<span class="sd">        :type w_lb: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param p_ub: upper bound on parameters</span>
+<span class="sd">        :type p_ub: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param p_lb: lower bound on parameters</span>
+<span class="sd">        :type p_lb: list, numpy array or CasADi DM array</span>
 <span class="sd">        :param z_ub: upper bound on algebraic states</span>
+<span class="sd">        :type z_ub: list, numpy array or CasADi DM array</span>
 <span class="sd">        :param z_lb: lower bound on algebraic states</span>
+<span class="sd">        :type z_lb: list, numpy array or CasADi DM array</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x_ub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1200,10 +1229,14 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets initial guess for the optimizer when no other information of the states or inputs are available.</span>
 
-<span class="sd">        :param x_guess: list of optimal dynamical state guess</span>
-<span class="sd">        :param w_guess: list of optimal input guess</span>
-<span class="sd">        :param p_guess: list of optimal parameter guess</span>
-<span class="sd">        :param z_guess: list of optimal algebraic state guess</span>
+<span class="sd">        :param x_guess: optimal dynamical state guess</span>
+<span class="sd">        :type x_guess: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param w_guess: optimal input guess                                                                                               ？？？？？？？？？？</span>
+<span class="sd">        :type w_guess: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param p_guess: optimal parameter guess</span>
+<span class="sd">        :type p_guess: list, numpy array or CasADi DM array</span>
+<span class="sd">        :param z_guess: optimal algebraic state guess</span>
+<span class="sd">        :type z_guess: list, numpy array or CasADi DM array</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x_guess</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1263,11 +1296,14 @@
 
 <div class="viewcode-block" id="MovingHorizonEstimator.set_aux_nonlinear_constraints"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.set_aux_nonlinear_constraints">[docs]</a>    <span class="k">def</span> <span class="nf">set_aux_nonlinear_constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aux_nl_const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        hzh - Sets the auxiliary nonlinear constraints and the lower and upper bound</span>
+<span class="sd">        ? Sets the auxiliary nonlinear constraints and the lower and upper bound</span>
 
 <span class="sd">        :param aux_nl_const: auxiliary nonlinear constraints</span>
+<span class="sd">        :type aux_nl_const: CasADi SX expression                                                                                       ？？？？？？？？？？？？？？？？？？</span>
 <span class="sd">        :param ub: upper bound</span>
+<span class="sd">        :type ub: list of float, integer or casadi.DM                                                                                  ？？？？？？？？？？？？？？？？？？</span>
 <span class="sd">        :param lb: lower bound</span>
+<span class="sd">        :type lb: list of float, integer or casadi.DM                                                                                  ？？？？？？？？？？？？？？？？？？</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="kc">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">aux_nl_const</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="n">lb</span><span class="p">]:</span>
@@ -1287,14 +1323,22 @@
 
 <span class="sd">        :param save_plot: if True plot will be saved under &#39;plot_dir/name_file.html&#39; if they are declared, otherwise in</span>
 <span class="sd">            current directory</span>
+<span class="sd">        :type save_plot: bool</span>
 <span class="sd">        :param plot_dir: path to the folder where plots are saved (default = None)</span>
+<span class="sd">        :type plot_dir: str</span>
 <span class="sd">        :param name_file: name of the file where plot will be saved  (default = mpc_prediction.html)</span>
+<span class="sd">        :type name_file: str</span>
 <span class="sd">        :param show_plot: if True, shows plots (default = False)</span>
+<span class="sd">        :type show_plot: bool</span>
 <span class="sd">        :param extras: dictionary with values that will be plotted over the predictions if keys are equal to predicted</span>
 <span class="sd">            states/inputs</span>
+<span class="sd">        :type extras: dict</span>
 <span class="sd">        :param extras_names: tags that will be attached to the extras in the legend</span>
+<span class="sd">        :type extras_names: list</span>
 <span class="sd">        :param title: title of the plots</span>
+<span class="sd">        :type title: str</span>
 <span class="sd">        :param format_figure: python function that modifies the format of the figure</span>
+<span class="sd">        :type format_figure: python function taking a bokeh figure object as an input</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
@@ -1306,7 +1350,7 @@
 
         <span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_interval</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_horizon</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nlp_solution</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;You need to run the MPC at least once to see the plots&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;You need to run the MHE at least once to see the plots&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">save_plot</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">plot_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">output_file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">plot_dir</span><span class="p">,</span> <span class="n">name_file</span><span class="p">))</span>
@@ -1408,7 +1452,7 @@
 
 <div class="viewcode-block" id="MovingHorizonEstimator.return_mhe_estimation"><a class="viewcode-back" href="../../../../api/estimators.html#hilo_mpc.MovingHorizonEstimator.return_mhe_estimation">[docs]</a>    <span class="k">def</span> <span class="nf">return_mhe_estimation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        hzh - returns the estimated state and state noise</span>
+<span class="sd">        returns the estimated state and state noise</span>
 
 <span class="sd">        :return: x_pred, w_pred</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1424,7 +1468,7 @@
                 <span class="n">w_pred</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">return</span> <span class="n">x_pred</span><span class="p">,</span> <span class="n">w_pred</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;There is still no mpc solution available. Run mpc.optimize() to get one.&quot;</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;There is still no mhe solution available. Run mhe.estimate() to get one.&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span></div>
 
     <span class="nd">@property</span>

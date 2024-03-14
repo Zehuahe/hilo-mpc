@@ -179,12 +179,15 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def _check_measurements(self, y, u):
         """
-        hzh - checks if the dimensions of the passed input and output measurements are consistent with 
+        checks if the dimensions of the passed input and output measurements are consistent with 
         the input and out dimensions set in the model
 
-        :param y: measurement
+        :param y: output
+        :type y: list, numpy array or CasADi DM array
         :param u: input
-        :return:
+        :type u: list, numpy array or CasADi DM array
+        :return: y(list), u(list)
+
         """
         y = check_and_wrap_to_list(y)
 
@@ -202,7 +205,8 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def _check_mhe_is_well_posed(self):
         """
-        hzh - checks some important things of mhe. (cost function, horizon length and the consistency between the dimensions of the state boundary and the model state dimensions)
+        checks some important things of mhe. (cost function, horizon length and the 
+        consistency between the dimensions of the state boundary and the model state dimensions)
 
         :return:
         """
@@ -227,7 +231,8 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def _scale_problem(self):
         """
-        hzh - scale the state, input and parameter of the boundary and model 
+        scale the state, input and parameter of the boundary and model
+
         :return:
         """
         self._x_ub = scale_vector(self._x_ub, self._x_scaling)
@@ -279,8 +284,10 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
         This adds measurements that will appended to the measurements history.
         At the moment it is assumed that measurements are available ata  constant time interval.
 
-        :param y_meas:
-        :param u_meas:
+        :param y_meas: output measurement
+        :type y_meas: list, numpy array or CasADi DM array
+        :param u_meas: input measurement
+        :type u_meas: list, numpy array or CasADi DM array
         :return:
         """
         if not self._nlp_setup_done:
@@ -313,17 +320,26 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def estimate(self, x_arrival=None, p_arrival=None, v0=None, runs=0, **kwargs):
         """
-        Compute MHE
+        Estimate the current states and parameters 
 
-        :param x_arrival:
-        :param p_arrival:
+        :param x_arrival: arrival state
+        :type x_arrival: list, numpy array or CasADi DM array
+        :param p_arrival: arrival parameter
+        :type p_arrival: list, numpy array or CasADi DM array
         :param v0: initial guess of the optimal vector
-        :param runs: number of optimizations to run. If different than zero will run very optimization will perturb the
-            initial guess v0 randomly.
-            ACHTUNG: this could cause problems with the integrators or give something outside constraints.
-            The output will be the solution with the minimum objective function (default 0)
+        :type v0: list or casadi DM
+        :param runs: number of optimizations to run. If different than zero will run very optimization will perturb the initial guess v0 randomly.
+            
+         Note: this could cause problems with the integrators or give something outside constraints.
+         The output will be the solution with the minimum objective function (default 0)
+        :type runs: int
         :param kwargs:
-        :return: u_opt: first piece of optimal control sequence
+        :return: x_opt: optimal state, p_opt: optimal parameter                                               
+
+                 x_opt, None: if there are no parameters set in the model
+
+                 None, None: when the horizon is not reached, in other words, the mhe hasn't obtained a sufficient number of measurements yet 
+
         """
         # TODO Check the shape of p0, x0
         # TODO to test
@@ -423,8 +439,10 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
         hzh - Sets up the optimization problem of mhe
 
         :param options: set the options that modify how optimization problem is set
+        :type options: dict
         :param nlp_opts:
         :param solver: set the solver of nlp problem
+        :type solver: dict
         
         :return:
         """
@@ -877,9 +895,13 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
         states and inputs.
 
         :param x_scaling: list of scaling factors
+        :type x_scaling: list or nd.arrays
         :param w_scaling: list of scaling factors
+        :type w_scaling: list or nd.arrays
         :param p_scaling: list of scaling factors
+        :type p_scaling: list or nd.arrays
         :param u_scaling: list of scaling factors
+        :type u_scaling: list or nd.arrays
         :return:
         """
         if x_scaling is None:
@@ -921,7 +943,8 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
         Sets the time-varying parameters for the estimator.
         The estimator will expect these as an input at every iteration
 
-        :param time_varying_parameters: list of strings with time varying parameter names
+        :param time_varying_parameters: time varying parameter names
+        :type time_varying_parameters: list of strings 
         :return:
         """
         # TODO check if it is the same as the parent class, if yes delete
@@ -942,16 +965,24 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
     def set_box_constraints(self, x_ub=None, x_lb=None, w_ub=None, w_lb=None, p_lb=None, p_ub=None, z_ub=None,
                             z_lb=None):
         """
-        hzh - Sets box constraints of the model's variables
+        Sets box constraints of the model's variables
 
         :param x_ub: upper bound on states.
-        :param x_lb: lower bound on  states
-        :param u_ub: upper bound on inputs
-        :param u_lb: lower bound on inputs
-        :param y_ub: upper bound on measurements
-        :param y_lb: lower bound on measurements
+        :type x_ub: list, numpy array or CasADi DM array
+        :param x_lb: lower bound on states
+        :type x_ub: list, numpy array or CasADi DM array
+        :param w_ub: upper bound on inputs                                                                             
+        :type w_ub: list, numpy array or CasADi DM array
+        :param w_lb: lower bound on inputs                                                                             
+        :type w_lb: list, numpy array or CasADi DM array
+        :param p_ub: upper bound on parameters
+        :type p_ub: list, numpy array or CasADi DM array
+        :param p_lb: lower bound on parameters
+        :type p_lb: list, numpy array or CasADi DM array
         :param z_ub: upper bound on algebraic states
+        :type z_ub: list, numpy array or CasADi DM array
         :param z_lb: lower bound on algebraic states
+        :type z_lb: list, numpy array or CasADi DM array
         :return:
         """
         if x_ub is not None:
@@ -1015,10 +1046,14 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
         """
         Sets initial guess for the optimizer when no other information of the states or inputs are available.
 
-        :param x_guess: list of optimal dynamical state guess
-        :param w_guess: list of optimal input guess
-        :param p_guess: list of optimal parameter guess
-        :param z_guess: list of optimal algebraic state guess
+        :param x_guess: optimal dynamical state guess
+        :type x_guess: list, numpy array or CasADi DM array
+        :param w_guess: optimal input guess                                                                                               
+        :type w_guess: list, numpy array or CasADi DM array
+        :param p_guess: optimal parameter guess
+        :type p_guess: list, numpy array or CasADi DM array
+        :param z_guess: optimal algebraic state guess
+        :type z_guess: list, numpy array or CasADi DM array
         :return:
         """
         if x_guess is not None:
@@ -1078,11 +1113,14 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def set_aux_nonlinear_constraints(self, aux_nl_const=None, ub=None, lb=None):
         """
-        hzh - Sets the auxiliary nonlinear constraints and the lower and upper bound
+        Sets the auxiliary nonlinear constraints and the lower and upper bound
 
         :param aux_nl_const: auxiliary nonlinear constraints
+        :type aux_nl_const: CasADi SX expression                                                                                       
         :param ub: upper bound
+        :type ub: list of float, integer or casadi.DM                                                                                  
         :param lb: lower bound
+        :type lb: list of float, integer or casadi.DM                                                                                  
         :return:
         """
         if None not in [aux_nl_const, ub, lb]:
@@ -1102,14 +1140,22 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
         :param save_plot: if True plot will be saved under 'plot_dir/name_file.html' if they are declared, otherwise in
             current directory
+        :type save_plot: bool
         :param plot_dir: path to the folder where plots are saved (default = None)
+        :type plot_dir: str
         :param name_file: name of the file where plot will be saved  (default = mpc_prediction.html)
+        :type name_file: str
         :param show_plot: if True, shows plots (default = False)
+        :type show_plot: bool
         :param extras: dictionary with values that will be plotted over the predictions if keys are equal to predicted
             states/inputs
+        :type extras: dict
         :param extras_names: tags that will be attached to the extras in the legend
+        :type extras_names: list
         :param title: title of the plots
+        :type title: str
         :param format_figure: python function that modifies the format of the figure
+        :type format_figure: python function taking a bokeh figure object as an input
         :return:
         """
         import os
@@ -1121,7 +1167,7 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
         time = self.current_time - self.sampling_interval * self._horizon
         if self._nlp_solution is None:
-            raise RuntimeError("You need to run the MPC at least once to see the plots")
+            raise RuntimeError("You need to run the MHE at least once to see the plots")
         if save_plot:
             if plot_dir is not None:
                 output_file(os.path.join(plot_dir, name_file))
@@ -1223,7 +1269,7 @@ class MovingHorizonEstimator(Estimator, DynamicOptimization):
 
     def return_mhe_estimation(self):
         """
-        hzh - returns the estimated state and state noise
+        returns the estimated state and state noise
 
         :return: x_pred, w_pred
         """

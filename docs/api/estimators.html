@@ -260,8 +260,8 @@ At the moment it is assumed that measurements are available ata  constant time i
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>y_meas</strong> – </p></li>
-<li><p><strong>u_meas</strong> – </p></li>
+<li><p><strong>y_meas</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – output measurement</p></li>
+<li><p><strong>u_meas</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – input measurement</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -273,22 +273,25 @@ At the moment it is assumed that measurements are available ata  constant time i
 <dl class="py method">
 <dt class="sig sig-object py" id="hilo_mpc.MovingHorizonEstimator.estimate">
 <span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_arrival</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_arrival</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hilo_mpc/modules/estimator/mhe.html#MovingHorizonEstimator.estimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hilo_mpc.MovingHorizonEstimator.estimate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute MHE</p>
+<dd><p>Estimate the current states and parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_arrival</strong> – </p></li>
-<li><p><strong>p_arrival</strong> – </p></li>
-<li><p><strong>v0</strong> – initial guess of the optimal vector</p></li>
-<li><p><strong>runs</strong> – number of optimizations to run. If different than zero will run very optimization will perturb the
-initial guess v0 randomly.
-ACHTUNG: this could cause problems with the integrators or give something outside constraints.
-The output will be the solution with the minimum objective function (default 0)</p></li>
+<li><p><strong>x_arrival</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – arrival state</p></li>
+<li><p><strong>p_arrival</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – arrival parameter</p></li>
+<li><p><strong>v0</strong> (<em>list</em><em> or </em><em>casadi DM</em>) – initial guess of the optimal vector</p></li>
+<li><p><strong>runs</strong> (<em>int</em>) – <p>number of optimizations to run. If different than zero will run very optimization will perturb the initial guess v0 randomly.</p>
+<p>Note: this could cause problems with the integrators or give something outside constraints.
+The output will be the solution with the minimum objective function (default 0)</p>
+</p></li>
 <li><p><strong>kwargs</strong> – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>u_opt: first piece of optimal control sequence</p>
+<dd class="field-even"><p><p>x_opt: optimal(estimated) state, p_opt: optimal(estimated) parameter                                               ？？？？？？？？？？？？？？？？？？</p>
+<p>x_opt, None: if there are no parameters set in the model</p>
+<p>None, None: when the horizon is not reached, in other words, the mhe hasn’t obtained a sufficient number of measurements yet</p>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -299,16 +302,16 @@ The output will be the solution with the minimum objective function (default 0)<
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>save_plot</strong> – if True plot will be saved under ‘plot_dir/name_file.html’ if they are declared, otherwise in
+<li><p><strong>save_plot</strong> (<em>bool</em>) – if True plot will be saved under ‘plot_dir/name_file.html’ if they are declared, otherwise in
 current directory</p></li>
-<li><p><strong>plot_dir</strong> – path to the folder where plots are saved (default = None)</p></li>
-<li><p><strong>name_file</strong> – name of the file where plot will be saved  (default = mpc_prediction.html)</p></li>
-<li><p><strong>show_plot</strong> – if True, shows plots (default = False)</p></li>
-<li><p><strong>extras</strong> – dictionary with values that will be plotted over the predictions if keys are equal to predicted
+<li><p><strong>plot_dir</strong> (<em>str</em>) – path to the folder where plots are saved (default = None)</p></li>
+<li><p><strong>name_file</strong> (<em>str</em>) – name of the file where plot will be saved  (default = mpc_prediction.html)</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em>) – if True, shows plots (default = False)</p></li>
+<li><p><strong>extras</strong> (<em>dict</em>) – dictionary with values that will be plotted over the predictions if keys are equal to predicted
 states/inputs</p></li>
-<li><p><strong>extras_names</strong> – tags that will be attached to the extras in the legend</p></li>
-<li><p><strong>title</strong> – title of the plots</p></li>
-<li><p><strong>format_figure</strong> – python function that modifies the format of the figure</p></li>
+<li><p><strong>extras_names</strong> (<em>list</em>) – tags that will be attached to the extras in the legend</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – title of the plots</p></li>
+<li><p><strong>format_figure</strong> (<em>python function taking a bokeh figure object as an input</em>) – python function that modifies the format of the figure</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -320,7 +323,7 @@ states/inputs</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="hilo_mpc.MovingHorizonEstimator.return_mhe_estimation">
 <span class="sig-name descname"><span class="pre">return_mhe_estimation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hilo_mpc/modules/estimator/mhe.html#MovingHorizonEstimator.return_mhe_estimation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hilo_mpc.MovingHorizonEstimator.return_mhe_estimation" title="Permalink to this definition">¶</a></dt>
-<dd><p>hzh - returns the estimated state and state noise</p>
+<dd><p>returns the estimated state and state noise</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>x_pred, w_pred</p>
@@ -331,13 +334,13 @@ states/inputs</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="hilo_mpc.MovingHorizonEstimator.set_aux_nonlinear_constraints">
 <span class="sig-name descname"><span class="pre">set_aux_nonlinear_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aux_nl_const</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hilo_mpc/modules/estimator/mhe.html#MovingHorizonEstimator.set_aux_nonlinear_constraints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hilo_mpc.MovingHorizonEstimator.set_aux_nonlinear_constraints" title="Permalink to this definition">¶</a></dt>
-<dd><p>hzh - Sets the auxiliary nonlinear constraints and the lower and upper bound</p>
+<dd><p>? Sets the auxiliary nonlinear constraints and the lower and upper bound</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>aux_nl_const</strong> – auxiliary nonlinear constraints</p></li>
-<li><p><strong>ub</strong> – upper bound</p></li>
-<li><p><strong>lb</strong> – lower bound</p></li>
+<li><p><strong>aux_nl_const</strong> (<em>CasADi SX expression                                                                                       ？？？？？？？？？？？？？？？？？？</em>) – auxiliary nonlinear constraints</p></li>
+<li><p><strong>ub</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>integer</em><em> or </em><em>casadi.DM                                                                                  ？？？？？？？？？？？？？？？？？？</em>) – upper bound</p></li>
+<li><p><strong>lb</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>integer</em><em> or </em><em>casadi.DM                                                                                  ？？？？？？？？？？？？？？？？？？</em>) – lower bound</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -349,18 +352,18 @@ states/inputs</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="hilo_mpc.MovingHorizonEstimator.set_box_constraints">
 <span class="sig-name descname"><span class="pre">set_box_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hilo_mpc/modules/estimator/mhe.html#MovingHorizonEstimator.set_box_constraints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hilo_mpc.MovingHorizonEstimator.set_box_constraints" title="Permalink to this definition">¶</a></dt>
-<dd><p>hzh - Sets box constraints of the model’s variables</p>
+<dd><p>Sets box constraints of the model’s variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_ub</strong> – upper bound on states.</p></li>
-<li><p><strong>x_lb</strong> – lower bound on  states</p></li>
-<li><p><strong>u_ub</strong> – upper bound on inputs</p></li>
-<li><p><strong>u_lb</strong> – lower bound on inputs</p></li>
-<li><p><strong>y_ub</strong> – upper bound on measurements</p></li>
-<li><p><strong>y_lb</strong> – lower bound on measurements</p></li>
-<li><p><strong>z_ub</strong> – upper bound on algebraic states</p></li>
-<li><p><strong>z_lb</strong> – lower bound on algebraic states</p></li>
+<li><p><strong>x_ub</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – upper bound on states.</p></li>
+<li><p><strong>x_lb</strong> – lower bound on states</p></li>
+<li><p><strong>w_ub</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – upper bound on inputs                                                                             ？？？？？？？？？？</p></li>
+<li><p><strong>w_lb</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – lower bound on inputs                                                                             ？？？？？？？？？？</p></li>
+<li><p><strong>p_ub</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – upper bound on parameters</p></li>
+<li><p><strong>p_lb</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – lower bound on parameters</p></li>
+<li><p><strong>z_ub</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – upper bound on algebraic states</p></li>
+<li><p><strong>z_lb</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – lower bound on algebraic states</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -376,10 +379,10 @@ states/inputs</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_guess</strong> – list of optimal dynamical state guess</p></li>
-<li><p><strong>w_guess</strong> – list of optimal input guess</p></li>
-<li><p><strong>p_guess</strong> – list of optimal parameter guess</p></li>
-<li><p><strong>z_guess</strong> – list of optimal algebraic state guess</p></li>
+<li><p><strong>x_guess</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – optimal dynamical state guess</p></li>
+<li><p><strong>w_guess</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – optimal input guess                                                                                               ？？？？？？？？？？</p></li>
+<li><p><strong>p_guess</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – optimal parameter guess</p></li>
+<li><p><strong>z_guess</strong> (<em>list</em><em>, </em><em>numpy array</em><em> or </em><em>CasADi DM array</em>) – optimal algebraic state guess</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -413,10 +416,10 @@ states and inputs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_scaling</strong> – list of scaling factors</p></li>
-<li><p><strong>w_scaling</strong> – list of scaling factors</p></li>
-<li><p><strong>p_scaling</strong> – list of scaling factors</p></li>
-<li><p><strong>u_scaling</strong> – list of scaling factors</p></li>
+<li><p><strong>x_scaling</strong> (<em>list</em><em> or </em><em>nd.arrays</em>) – list of scaling factors</p></li>
+<li><p><strong>w_scaling</strong> (<em>list</em><em> or </em><em>nd.arrays</em>) – list of scaling factors</p></li>
+<li><p><strong>p_scaling</strong> (<em>list</em><em> or </em><em>nd.arrays</em>) – list of scaling factors</p></li>
+<li><p><strong>u_scaling</strong> (<em>list</em><em> or </em><em>nd.arrays</em>) – list of scaling factors</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -432,7 +435,7 @@ states and inputs.</p>
 The estimator will expect these as an input at every iteration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>time_varying_parameters</strong> – list of strings with time varying parameter names</p>
+<dd class="field-odd"><p><strong>time_varying_parameters</strong> (<em>list</em><em> of </em><em>strings</em>) – time varying parameter names</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p></p>
@@ -447,9 +450,9 @@ The estimator will expect these as an input at every iteration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>options</strong> – set the options that modify how optimization problem is set</p></li>
+<li><p><strong>options</strong> (<em>dict</em>) – set the options that modify how optimization problem is set</p></li>
 <li><p><strong>nlp_opts</strong> – </p></li>
-<li><p><strong>solver</strong> – set the solver of nlp problem</p></li>
+<li><p><strong>solver</strong> (<em>dict</em>) – set the solver of nlp problem</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
